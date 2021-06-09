@@ -1,14 +1,15 @@
 const { DataTypes } = require("sequelize");
-
+const { Sequelize } = require("sequelize");
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define("videogame", {
-   /*  id: {
-      type: DataTypes.INTEGER primaryKey,
-      allowNull: false,
-    }, */
+     id: {
+      type: DataTypes.UUID, 
+      primaryKey: true,
+      
+    }, 
 
     name: {
       type: DataTypes.STRING,
@@ -21,7 +22,7 @@ module.exports = (sequelize) => {
     },
 
     plataform: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY((Sequelize.TEXT)),
       allowNull: false,
     },
 

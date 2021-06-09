@@ -1,26 +1,30 @@
 const { Router } = require("express");
 require("dotenv").config();
 const axios = require("axios").default;
-const { Videogames, Genres } = require("../db.js");
-var { nanoid } = require("nanoid");
+const { Videogame, Genres } = require("../db.js");
+const { v4: uuidv4 } = require("uuid");
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-/* const videogames = require('./videogames.js');
-const videogame = require('./videogames.js');
-const genres = require('./genres.js'); */
+
 const API_KEY = process.env.VIDEOGAMES_API_KEY;
 const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
+
+
 router.get("/videogames", async (req, res) => {
-  const { name } = req.query;
-  /* console.log(name); */
+  let { name } = req.query;
+
   if (!name) {
     try {
       let respuesta = [];
+      const respuestaBase = await Videogame.findAll({ include: Genres });
+      respuestaBase.forEach((element) => {
+        if (respuesta.length <= 14) respuesta.push(element);
+      });
       let response = await axios.get(
         `https://api.rawg.io/api/games?key=${API_KEY}`
       );
@@ -36,6 +40,10 @@ router.get("/videogames", async (req, res) => {
   if (name) {
     try {
       let filtrado = [];
+      const respuestaBase = await Videogame.findAll({ where: { name: name } });
+      respuestaBase.forEach((element) => {
+        if (filtrado.length <= 14) filtrado.push(element);
+      });
       let respuesta = await axios.get(
         `https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`
       );
@@ -54,11 +62,13 @@ router.get("/videogame/:id", async (req, res) => {
   const { id } = req.params;
   if (id) {
     try {
+      const game = await Videogame.findOne({ where: { id: id } });
+      if (game) return res.json(game);
       let respuesta = await axios.get(
         `https://api.rawg.io/api/games/${id}?key=${API_KEY}`
       );
       if (!respuesta)
-        return res.status(404).json({ error: "Juego con encontrado" });
+        return res.status(404).json({ error: "Juego no encontrado" });
       console.log("------busqueda por nombre exitosa------");
       return res.json(respuesta.data);
     } catch (error) {
@@ -69,45 +79,56 @@ router.get("/videogame/:id", async (req, res) => {
 });
 
 router.get("/genres", async (req, res) => {
-  let response = await axios.get(
+  
+    
+    let response = await axios.get(
     `https://api.rawg.io/api/genres?key=${API_KEY}`
   );
-  return res.json(response.data);
+  response.data.results.map((genero) => Genres.findOrCreate({where: {name: genero.name}}))
+  
+  const generos = await Genres.findAll();
+
+  const generosFiltrados = generos.sort(function (a, b) {
+  if (a.id > b.id) {
+    return 1;
+  }
+  if (a.id < b.id) {
+    return -1;
+  }
+  return 0;
+  });  
+
+  console.log('------pedido de genero exitoso--------')
+  return res.json(generosFiltrados)
 });
 
 router.post("/videogame", async (req, res) => {
-  const { name, description, plataform, released, rating, genres } = req.body;
-  console.log(name);
-  console.log(plataform);
+  const id = uuidv4();
+  let { name, description, released, rating, plataform, genres } = req.body;
+  let videogame = { id, name, description, released, rating, plataform };
   let respuesta = await axios.get(
-    `https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`
+    `https://api.rawg.io/api/games?search=${videogame.name}&key=${API_KEY}`
   );
+
   if (respuesta) {
     let filtro = respuesta.data.results.find(
-      (elemento) => elemento.name === name
+      (elemento) => elemento.name === videogame.name
     );
     if (filtro) return res.json({ error: "Este juego ya existe" });
   }
-  console.log("-------------------");
-  const videogame = await Videogames.findOne({ where: { name: name } });
-  console.log(videogame);
-  if (videogame) return res.json({ error: "Este juego ya existe" });
-  else {
-    const nuevoVideogame = await Videogames.create({
-      where: {
-        name: name,
-        description: description,
-        plataform: plataform,
-        released: released,
-        rating: rating,
-      },
-    });
-    await nuevoVideogame.setGenres(genres);
-    return res
-      .status(200)
-      .json({ mensaje: "El juego ha sido creado exitosamente" });
-  }
+  
+  const game = await Videogame.findOne({ where: { name: videogame.name } });
 
-});
+  if (game) return res.json({ error: "Este juego ya existe" });
+  else {  
+    const juego = await Videogame.create(videogame);
+    
+    await juego.setGenres(genres);
+                         
+    return res    
+      .status(200)
+      .json("El juego ha sido creado exitosamente");   
+  }  
+});    
 
 module.exports = router;
