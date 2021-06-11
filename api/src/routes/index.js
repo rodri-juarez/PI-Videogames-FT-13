@@ -13,8 +13,6 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-
-
 router.get("/videogames", async (req, res) => {
   let { name } = req.query;
 
@@ -31,12 +29,11 @@ router.get("/videogames", async (req, res) => {
       response.data.results.forEach((element) => {
         if (respuesta.length <= 14) respuesta.push(element);
       });
-      console.log("---------pedido de juegos exitoso------------");
       return res.json(respuesta);
     } catch (error) {
       res.status(500).json({ error: "error del servidor" });
     }
-  }
+  }   
   if (name) {
     try {
       let filtrado = [];
@@ -50,7 +47,6 @@ router.get("/videogames", async (req, res) => {
       respuesta.data.results.forEach((element) => {
         if (filtrado.length <= 14) filtrado.push(element);
       });
-      console.log("--------filtrado por nombre exitoso-------------");
       return res.json(filtrado);
     } catch (error) {
       res.status(500).json({ error: "error del servidor" });
@@ -69,7 +65,6 @@ router.get("/videogame/:id", async (req, res) => {
       );
       if (!respuesta)
         return res.status(404).json({ error: "Juego no encontrado" });
-      console.log("------busqueda por nombre exitosa------");
       return res.json(respuesta.data);
     } catch (error) {
       res.status(500).json({ error: "error del servidor" });
@@ -79,33 +74,31 @@ router.get("/videogame/:id", async (req, res) => {
 });
 
 router.get("/genres", async (req, res) => {
-  
-    
-    let response = await axios.get(
+  let response = await axios.get(
     `https://api.rawg.io/api/genres?key=${API_KEY}`
   );
-  response.data.results.map((genero) => Genres.findOrCreate({where: {name: genero.name}}))
-  
-  const generos = await Genres.findAll();
+  response.data.results.map((genero) =>
+    Genres.findOrCreate({ where: { name: genero.name } })
+  );
+
+  const generos = await Genres.findAll();  
 
   const generosFiltrados = generos.sort(function (a, b) {
-  if (a.id > b.id) {
-    return 1;
-  }
-  if (a.id < b.id) {
-    return -1;
-  }
-  return 0;
-  });  
-
-  console.log('------pedido de genero exitoso--------')
-  return res.json(generosFiltrados)
+    if (a.id > b.id) {
+      return 1;
+    }
+    if (a.id < b.id) {
+      return -1;
+    }
+    return 0;
+  });
+  return res.json(generosFiltrados);
 });
 
 router.post("/videogame", async (req, res) => {
   const id = uuidv4();
-  let { name, description, released, rating, plataform, genres } = req.body;
-  let videogame = { id, name, description, released, rating, plataform };
+  let { name, description, released, rating, plataforms, genres } = req.body;
+  let videogame = { id, name, description, released, rating, plataforms };
   let respuesta = await axios.get(
     `https://api.rawg.io/api/games?search=${videogame.name}&key=${API_KEY}`
   );
@@ -116,19 +109,18 @@ router.post("/videogame", async (req, res) => {
     );
     if (filtro) return res.json({ error: "Este juego ya existe" });
   }
-  
+
   const game = await Videogame.findOne({ where: { name: videogame.name } });
 
   if (game) return res.json({ error: "Este juego ya existe" });
-  else {  
-    const juego = await Videogame.create(videogame);
-    
+  else {
+    const juego = await Videogame.create(videogame);  
+
     await juego.setGenres(genres);
-                         
-    return res    
-      .status(200)
-      .json("El juego ha sido creado exitosamente");   
-  }  
-});    
+
+    return res.status(200).json("El juego ha sido creado exitosamente");
+  }
+});
 
 module.exports = router;
+  
