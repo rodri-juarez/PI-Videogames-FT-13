@@ -1,73 +1,45 @@
 import React, { useState } from "react";
-import axios from 'axios';
+import { useDispatch, useSelector} from "react-redux";
+import { getVideogame } from "../actions";
+
 export default function SearchBar() {
-  const [videogame, /* setVideogame */] = useState("");
-  const [juego, setJuego] = useState("");
+  const juego = useSelector(store => store.videogame)
+  const dispatch = useDispatch();
+  const [videogame, setVideogame] = useState()
 
-  function onSearch(videogame) {
-    axios.get(
-        `http://localhost:3001/videogames?name=${videogame}`,
-        console.log("hola")
-      )
-      .then((recurso) => {
-        console.log(recurso.data[0]);
 
-        const videogames = {
-          id: juego.id,
-          key: juego.id,
-          name: juego.name,
-          description: juego.description,
-          rating: juego.rating,
-          released: juego.released,
-          plataforms: juego.plataforms,
-          genres: juego.genres,
-        };
-        setJuego(videogames);
-      });
+
+  function handleChange(e) {
+    setVideogame(e.target.value);
   }
-
+  
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(getVideogame(videogame));
+  }
+ /*  
+   */
+  console.log('----ejecucion en search----')
+  console.log(videogame)
+  console.log(juego)
   return (
     <>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          onSearch(videogame);
-        }}
-      >
-        <input
-          type="text"
-          placeholder="Videogame..."
-          value={videogame}
-         /*  onChange={(e) => setVideogame(e.target.value)} */
-        />
-        <input type="submit" value="Agregar" />
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <div>
+          <label /* className="label" htmlFor="title" */>
+            Search:{" "}
+          </label>
+          <input
+            type="text"
+            id="videogame"
+            autoComplete="off"
+            onChange={(e) => handleChange(e)}
+          />
+          
+        </div>
+        <button type="submit">BUSCAR</button>
       </form>
-      <h1>{juego.name}</h1>
     </>
   );
 }
 
-
-
-
-
-axios.get("http://localhost:3001/videogames", console.log('hola')).then((recurso) => {
-     let juegos = [];
-     console.log(recurso.data)
-      recurso.data.map((juego) => {
-        const videogame = {
-          id: juego.id,
-          key: juego.id,
-          name: juego.name,
-          description: juego.description,
-          rating: juego.rating,
-          released: juego.released,
-          plataforms: juego.plataforms,
-          genres: juego.genres,
-        };
-        return juegos.push(videogame)
-      }); 
-      /* setVideogames(()=> [juegos]) */
-      
-    }
-  );

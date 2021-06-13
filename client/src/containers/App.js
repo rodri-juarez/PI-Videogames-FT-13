@@ -4,7 +4,7 @@ import "./App.css";
 import Home from '../components/Home'
 /* import Nav from "../components/Nav"; */
 import Page from "../components/paginaInicial";
-
+import PageCreated from "../components/pageCreate";
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
       <Router>
       <Route exact path='/'><Page /></Route>
       <Route exact path='/Home'><Home /></Route>
-      
+      <Route exact path='/CreateVideogame'><PageCreated /></Route>
       </Router>
     </div>
   );

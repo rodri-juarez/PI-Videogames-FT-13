@@ -1,0 +1,43 @@
+
+
+
+
+#closeIcon {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 8px;
+  margin-top: 8px;
+}
+
+
+.div{
+  width: 400px;
+  border: black solid 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* padding: 50px; */
+  margin: 20px;
+} 
+
+.prueba{ 
+ /*  border: red solid 1px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.relleno{
+  padding: 50px;
+}
+
+.a{
+  /* border: red solid 1px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

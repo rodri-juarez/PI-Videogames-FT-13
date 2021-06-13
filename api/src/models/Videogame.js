@@ -3,11 +3,11 @@ const { Sequelize } = require("sequelize");
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
-  // defino el modelo
-  sequelize.define("videogame", {
+  // defino el modelo  
+  sequelize.define("videogame", {     
      id: {
-      type: DataTypes.UUID, 
-      primaryKey: true,
+      type: DataTypes.UUID,   
+      primaryKey: true,  
       
     }, 
 
@@ -18,27 +18,27 @@ module.exports = (sequelize) => {
 
     description: {
       type: DataTypes.TEXT,
-      allowNull: false,
-    },
+      allowNull: false,  
+    },  
 
-    plataform: {
+    plataforms: {
       type: DataTypes.ARRAY((Sequelize.TEXT)),
-      allowNull: false,
+      allowNull: false,  
     },
-
-    released: {
-      type: DataTypes.STRING,
+    
+    relesead: {
+      type: DataTypes.DATEONLY,
       allowNull: false,
-    },
+    },  
 
     rating: {
       type: DataTypes.NUMERIC,
     },
-  });
+  });  
 
   sequelize.define("genres", {
     name: {
-      type: DataTypes.STRING,
+      type: DataTypes.ARRAY((Sequelize.TEXT)), 
       allowNull: false,
     },
   });
