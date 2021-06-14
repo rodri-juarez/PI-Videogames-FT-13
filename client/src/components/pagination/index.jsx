@@ -1,4 +1,4 @@
-import { nextPage } from "../actions";
+import { nextPage } from "../../actions";
 import { useDispatch } from "react-redux";
 export default function Pagination() {
   const dispatch = useDispatch();

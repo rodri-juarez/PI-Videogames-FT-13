@@ -1,5 +1,6 @@
 import React from "react";
 import style from './Card.module.css'
+import { Link } from "react-router-dom";
 
 export default function Card(props) {
   
@@ -14,7 +15,9 @@ export default function Card(props) {
           <img src={props.videogame.background_image} alt="Imagen" width="400" height="200"></img>
         </div>
         <div className={style.prueba}>
-          <p>{props.videogame.name}</p>
+        {" "}
+                <Link to={`/Videogame/${props.videogame.id}`}>{props.videogame.name}</Link>{" "}
+          {/* <p>{props.videogame.name}</p> */}
         </div>
         <div>
          {/*  <p>{props.videogame.genres[0]}</p> */}

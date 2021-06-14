@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector} from "react-redux";
-import { getVideogame } from "../actions";
+import { getVideogame } from "../../actions";
 
 export default function SearchBar() {
   const juego = useSelector(store => store.videogame)
@@ -20,8 +20,7 @@ export default function SearchBar() {
  /*  
    */
   console.log('----ejecucion en search----')
-  console.log(videogame)
-  console.log(juego)
+  
   return (
     <>
       <form onSubmit={(e) => handleSubmit(e)}>

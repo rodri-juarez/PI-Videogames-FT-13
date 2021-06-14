@@ -1,27 +1,38 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getVideogames } from "../actions";
-import Card from "../components/cards/Card";
+import { getVideogames, ordenarAlfabeticamente } from "../../actions";
+import Card from "../cards/Card";
 import style from "./Home.module.css";
 import { Link } from "react-router-dom";
-import Search from "./Search";
-import Pagination from "./Pagination";
+import Search from "../search/index";
+import Pagination from "../pagination/index";
 
 export default function Home() {
   const videogames = useSelector((store) => store.videogames);
   const dispatch = useDispatch();
-  
-
-  
+  const [ordenAlfabetico, setOrdenAlfabetico] = useState(false);
 
   useEffect(() => {
-    if (!videogames) dispatch(getVideogames());
-  }, [dispatch, videogames]);
+    if (videogames.length === 0) dispatch(getVideogames());
+    if (ordenAlfabetico) dispatch(ordenarAlfabeticamente());
+  }, [dispatch, videogames, ordenAlfabetico]);
 
-  console.log(videogames);
+  /*  const orden = function ordenar(){
+    console.log(videogames)
+    videogames.sort(function (a, b) {
+      if (a.rating > b.rating) {
+        return 1;
+      }
+      if (a.rating < b.rating) {
+        return -1;
+      }
+      return 0;})
+    console.log('entro a funcion ordenadora')
+    console.log(videogames)
+    return setOrdenado(true)
 
-
-
+  }
+ */
   return (
     <>
       {/*  Section NavBar */}
@@ -71,44 +82,45 @@ export default function Home() {
           </label>
           <select name="select" defaultValue="Value1">
             <option value="value1">Value 1</option>
-            <option value="value2">
+            <option value="value2">Value 2</option>
+            <option value="value3">Value 3</option>
+          </select>
+        </div>
+
+        <div>
+          <label className={style.prueba} htmlFor="ordenar">
+            Genres
+          </label>
+          <select name="select" id="ordenar" defaultValue="Value1">
+            <option value="value1">Value 1</option>
+            <option value="value2" selected>
               Value 2
             </option>
             <option value="value3">Value 3</option>
           </select>
         </div>
-
-        
-          <div>
-            <label className={style.prueba} htmlFor="ordenar">
-              Genres
-            </label>
-            <select name="select" id='ordenar' defaultValue="Value1">
-              <option value="value1">Value 1</option>
-              <option value="value2" selected>
-                Value 2
-              </option>
-              <option value="value3">Value 3</option>
-            </select>
-          </div>
-        </div>
-      
+      </div>
 
       <div className={style.prueba}>
-          <div>
-            <label className={style.prueba} htmlFor="alfabetico">
-              Alfabetico
-            </label>
-            <select name="select" id='alfabetico' defaultValue="Value1">
-              <option value="value1">Value 1</option>
-              <option value="value2" selected>
-                Value 2
-              </option>
-              <option value="value3">Value 3</option>
-            </select>
-          </div>
+        <div>
+          <label className={style.prueba} htmlFor="alfabetico">
+            Alfabetico
+          </label>
+          <select name="select" id="alfabetico" defaultValue="Value1">
+            <option value="value1">Value 1</option>
+            <option value="value2">Value 2</option>
+            <option value="value3">Value 3</option>
+          </select>
         </div>
-      
+
+        <button
+          onClick={() => {
+            setOrdenAlfabetico(true);
+          }}
+        >
+          ordenar alf
+        </button>
+      </div>
 
       {/*  Section de Videogames */}
 
@@ -121,7 +133,7 @@ export default function Home() {
           );
         })}
       </section>
-     
+
       {/*  Section de Paginacion */}
 
       <Pagination />

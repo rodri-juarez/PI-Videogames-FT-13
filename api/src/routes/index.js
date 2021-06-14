@@ -11,7 +11,7 @@ const API_KEY = process.env.VIDEOGAMES_API_KEY;
 const router = Router();
 
 // Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
+// Ejemplo: router.use('/auth', authRouter);  
 
 router.get("/videogames", async (req, res) => {
   let name  = req.query.search;
@@ -115,21 +115,21 @@ router.get("/genres", async (req, res) => {
     return 0;
   });
   return res.json(generosFiltrados);
-});
-    
+});   
+      
 router.post("/videogame", async (req, res) => {
   const id = uuidv4();
   let { name, description, relesead, rating, plataforms, genres } = req.body;
   let videogame = { id, name, description, relesead, rating, plataforms };
-  
+  console.log(genres)  
   let respuesta = await axios.get(
     `https://api.rawg.io/api/games?search=${videogame.name}&key=${API_KEY}`
   );
   console.log('-----respuesta api')
- 
-  
+    
+          
   if (respuesta) {
-    let filtro = respuesta.data.results.find(
+    let filtro = respuesta.data.results.find(  
       (elemento) => elemento.name === videogame.name
     );
     if (filtro) return res.json({ error: "Este juego ya existe" });
@@ -145,7 +145,7 @@ router.post("/videogame", async (req, res) => {
     
     return res.status(200).json("El juego ha sido creado exitosamente");
   }  
-});
-
-module.exports = router;
+});    
+ 
+module.exports = router;              
   

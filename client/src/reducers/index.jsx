@@ -1,4 +1,4 @@
-import { GET_VIDEOGAMES, GET_VIDEOGAME, ADD_VIDEOGAME, NEXT_PAGE} from "../actions";
+import { GET_VIDEOGAMES, GET_VIDEOGAME, ADD_VIDEOGAME, NEXT_PAGE, ORDENAR_ALFABETICAMENTE} from "../actions";
 
 const initialState = {
   videogames: [],
@@ -25,6 +25,19 @@ function reducer(state = initialState, action) {
       return {
         ...state,
         videogames: action.payload,
+      };
+      case ORDENAR_ALFABETICAMENTE:
+      return {
+        ...state,
+        videogames: state.videogames.sort(function (a, b) {
+        
+      if (a.rating > b.rating) {
+        return 1;
+      }
+      if (a.rating < b.rating) {
+        return -1;
+      }
+      return 0;}),
       };
 
     default:

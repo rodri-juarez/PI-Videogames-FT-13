@@ -4,6 +4,7 @@ export const GET_VIDEOGAMES = "GET_VIDEOGAMES";
 export const GET_VIDEOGAME = "GET_VIDEOGAME";
 export const ADD_VIDEOGAME = "ADD_VIDEOGAME";
 export const NEXT_PAGE = "NEXT_PAGE";
+export const ORDENAR_ALFABETICAMENTE =  "ORDENAR_ALFABETICAMENTE";
 
 export function getVideogames() {
   return async function (dispatch) {
@@ -42,3 +43,9 @@ export function nextPage(page) {
   };
 }
    
+export function ordenarAlfabeticamente() {
+  console.log('ejecucion de ordenarAlfabeticamente')
+
+  return { type: "ORDENAR_ALFABETICAMENTE"};
+
+}

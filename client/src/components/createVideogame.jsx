@@ -8,7 +8,7 @@ export default function CreateVideogame() {
   const [description, setDescription] = useState("");
   const [rating, setRating] = useState("");
   const [plataforms, setPlataforms] = useState([]);
-  const [genres, setGenres] = useState([]);
+  const [genres] = useState([]);
 
   const dispatch = useDispatch();
     
@@ -69,17 +69,22 @@ export default function CreateVideogame() {
         </div>
         <div>
           <label htmlFor="genres" >
-            Genres
+            Genres 
           </label>
-          <select name="genres" defaultValue="---" onChange={(e) => setGenres([e.target.value])}>
+          <select name="genres" defaultValue="---" onChange={(e) => genres.push([e.target.value])}>
             <option value="---">---</option>
             <option value="Action">Action</option>
             <option value="Indie">Indie</option>
             <option value="Adventure">Adventure</option>
           </select>
+          <pre>
+        <code>
+          {genres}
+        </code>
+      </pre>
         </div>
         <button type="submit"> Crear Videogame</button>
       </form>
-    </>
+    </>   
   );
 }
