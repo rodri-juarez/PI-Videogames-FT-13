@@ -1,20 +1,30 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getVideogameID } from '../../actions'
 
-
-export default function VideogameDetail({videogame}){
-
+export default function VideogameDetail(props){
+    const videogame = useSelector((store) =>  store.videogame )
+    const dispatch = useDispatch()
+    const id = props.id;
+    const {name, rating, genres, plataforms, description, relesead, background_image} = videogame
+    useEffect(()=>{
+      if(videogame.length === 0) dispatch(getVideogameID(id))
+    }, [dispatch, videogame, id])
      console.log('adentro de videogame detail')
      console.log(videogame)
+     console.log(genres)
+     
     return (
     <>
-    
+    <h1>{id}</h1>
     {/* <h3>{videogame.background_image}</h3> */}
-    <div>{videogame.name}</div>
-    <div>{videogame.genres}</div>
-    <div>{videogame.relesead}</div>
-    <div>{videogame.rating}</div>
-    <div>{videogame.plataforms}</div>
-    <div>{videogame.description}</div>
+    <div>{name}</div>
+    {/* <div>{genres[0].name}</div> */}
+    <div>{relesead}</div>
+    <div>{rating}</div>
+    {/* <div>{plataforms[0].name}</div> */}
+    <div>{description}</div>
     </>
-    )
+    )  
 }
 

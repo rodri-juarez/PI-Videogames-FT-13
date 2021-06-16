@@ -6,18 +6,19 @@ export default function CreateVideogame() {
   const [name, setName] = useState("");
   const [relesead, setRelesead] = useState("");
   const [description, setDescription] = useState("");
-  const [rating, setRating] = useState("");
+  const [rating, setRating] = useState();
   const [plataforms, setPlataforms] = useState([]);
   const [genres] = useState([]);
-
+  const [creator] = useState('usuario')
+  
   const dispatch = useDispatch();
-    
+    console.log(creator)
 
   function handleSubmit(e) {
     e.preventDefault();
     
     dispatch(
-      addVideogame({ name, relesead, plataforms, genres, rating, description })
+      addVideogame({ name, relesead, plataforms, genres, rating, description, creator })
     );
   }
   return (
@@ -71,7 +72,7 @@ export default function CreateVideogame() {
           <label htmlFor="genres" >
             Genres 
           </label>
-          <select name="genres" defaultValue="---" onChange={(e) => genres.push([e.target.value])}>
+          <select name="genres" defaultValue="---" onChange={(e) => genres.push({name: e.target.value})}>
             <option value="---">---</option>
             <option value="Action">Action</option>
             <option value="Indie">Indie</option>

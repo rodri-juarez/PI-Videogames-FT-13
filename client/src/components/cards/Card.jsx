@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Card(props) {
   
   
- console.log(props.videogame) 
+  
   return (
     <div className={style.a}>
       <div className={style.div}>
@@ -17,10 +17,9 @@ export default function Card(props) {
         <div className={style.prueba}>
         {" "}
                 <Link to={`/Videogame/${props.videogame.id}`}>{props.videogame.name}</Link>{" "}
-          {/* <p>{props.videogame.name}</p> */}
         </div>
         <div>
-         {/*  <p>{props.videogame.genres[0]}</p> */}
+          {/* <p>{props.videogame.genres[0]}</p> */}
         </div>
       </div>
       </div>

@@ -6,14 +6,14 @@ import Home from '../components/home/index'
 import Page from "../components/paginaInicial";
 import PageCreated from "../components/pageCreate";
 import VideogameDetail from '../components/videogameDetail/index.jsx'
-import { useSelector } from "react-redux";
+/* import { useSelector } from "react-redux"; */
 
 
 function App() {
-  const videogames = useSelector((store) => store.videogames);
+  /* const videogames = useSelector((store) => store.videogames);
+ */
 
-
-  function onFilter(videogame) {
+  /* function onFilter(videogame) {
     let juego = videogames.filter(game => game.id === videogame.id);
     if(juego.length > 0) {
       console.log('console log de juego en onFilter')
@@ -22,7 +22,7 @@ function App() {
     } else {
         return null;
     }
-  }
+  } */
   return (
     <div>
       <Router>
@@ -31,7 +31,7 @@ function App() {
       <Route exact path='/CreateVideogame'><PageCreated /></Route>
       <Route exact path='/Videogame/:id'
     render={({match}) => <VideogameDetail
-          videogame={onFilter(match.params.videogame)}
+          id={match.params.id}
         />} /> 
       </Router>
     </div>

@@ -11,6 +11,7 @@ module.exports = (sequelize) => {
       
     }, 
 
+
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -20,7 +21,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,  
     },  
-
+  
     plataforms: {
       type: DataTypes.ARRAY((Sequelize.TEXT)),
       allowNull: false,  
@@ -33,13 +34,18 @@ module.exports = (sequelize) => {
 
     rating: {
       type: DataTypes.NUMERIC,
+    },    
+
+    creator: {
+      type: DataTypes.TEXT,
     },
   });  
 
   sequelize.define("genres", {
     name: {
-      type: DataTypes.ARRAY((Sequelize.TEXT)), 
+      type: DataTypes.TEXT, 
       allowNull: false,
-    },
-  });
+    },  
+  });  
 };
+          
