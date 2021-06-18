@@ -1,4 +1,4 @@
-import CreateVideogame from "./createVideogame"
+import CreateVideogame from "./createVideogame/createVideogame"
 
 
 export default function PageCreated () {

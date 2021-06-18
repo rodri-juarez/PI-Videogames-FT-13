@@ -4,12 +4,14 @@ export const GET_VIDEOGAMES = "GET_VIDEOGAMES";
 export const GET_VIDEOGAME = "GET_VIDEOGAME";
 export const GET_VIDEOGAME_ID = "GET_VIDEOGAME_ID"
 export const ADD_VIDEOGAME = "ADD_VIDEOGAME";
+export const GET_GENRES = "GET_GENRES";
+
 /* export const NEXT_PAGE = "NEXT_PAGE"; */
 export const ORDENAR_ALFABETICAMENTE =  "ORDENAR_ALFABETICAMENTE";
 export const ORDENAR_DESCENDENTEMENTE = "ORDENAR_DESCENDENTEMENTE";
 export const ORDENAR_POR_RATING = "ORDENAR_POR_RATING";
 export const CREATOR = "CREATOR";
-
+export const GENRES = "GENRES";
 
 
 export function getVideogames() {
@@ -47,6 +49,15 @@ export function addVideogame({ name, description, relesead, rating, plataforms, 
     dispatch({ type: "ADD_VIDEOGAME"})
 }}
 
+export function getGenres() {
+  return async function (dispatch) {
+    console.log('adentro de pedido por genres')
+    const response = await axios.get(
+      `http://localhost:3001/genres`
+    );
+    dispatch({ type: "GET_GENRES", payload: response.data });
+  };
+}
 /* export function nextPage(page) {
   return async function (dispatch) {
     console.log('ejecucion de nextPage')
@@ -87,5 +98,13 @@ export function ordenarPorCreator() {
   console.log('ejecucion de ordenar por CREADOR')
 
   return { type: "CREATOR"};
+
+}
+
+export function ordenarPorGenres(genre) {
+  console.log(genre)
+  console.log('ejecucion de ordenar por GENRES')
+
+  return { type: "GENRES", payload: genre};
 
 }

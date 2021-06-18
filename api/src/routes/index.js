@@ -1,6 +1,7 @@
 const { Router } = require("express");
 require("dotenv").config();
 const axios = require("axios").default;
+const { Sequelize } = require("sequelize");
 const { Videogame, Genres } = require("../db.js");
 const { v4: uuidv4 } = require("uuid");
 
@@ -15,51 +16,73 @@ const router = Router();
 
 router.get("/videogames", async (req, res) => {
   let name = req.query.search;
-  /* let page = req.query.page; */
-  console.log("-----entro a videogames----------");
-  console.log(req.query);
+  const respuesta = [];
 
-  var previous = null;
-  var next = null;
-  console.log(previous);
-  console.log(next);
-  if (next === null) {
-    console.log("en la ejecucion correcta para page 1");
-    const respuesta = [];
+  if (!name) {
     const respuestaBase = await Videogame.findAll({ include: Genres });
-    respuestaBase.forEach((element) => {
-      if (respuesta.length <= 14) respuesta.push(element);
+    respuestaBase.map((element) => {
+      return respuesta.push(element);
     });
-    let response = await axios.get(
-      `https://api.rawg.io/api/games?key=${API_KEY}`
-    );
-    previous = response.data.previous;
-    next = response.data.next;
-    console.log(next);
-    response.data.results.forEach((element) => {
-      if (respuesta.length <= 14) respuesta.push(element);
-    });
-    return res.json(respuesta);
-    /*  catch (error) {
-      res.status(500).json({ error: "error del servidor" });
-    } */
-  }
-  if (next) {
-    try {
-      console.log(
-        "entro a la ejecucion correcta para paginacion de 2 en adelante"
-      );
-      const respuesta = [];
-      let response = await axios.get(`${next}`);
-      response.data.results.forEach((element) => {
-        if (respuesta.length <= 14) respuesta.push(element);
-      });
-      return res.json(respuesta);
-    } catch (error) {
-      res.status(500).json({ error: "error del servidor" });
-    }
-  }
+    console.time();
+    let response = await axios
+      .get(`https://api.rawg.io/api/games?key=${API_KEY}`)
+      .then((response) => {
+        let next = response.data.next;
+        response.data.results.map((element) => {
+          respuesta.push(element);
+        });
+        console.log(next);
+        return next;
+      })
+      .then(async (next) => {
+        console.log("entro a 2do then");
+        const response = await axios.get(`${next}`);
 
+        response.data.results.map((element) => {
+          return respuesta.push(element);
+        });
+        next = response.data.next;
+        console.log(next);
+        return next;
+      })
+      .then(async (next) => {
+        console.log("entro al 3er then");
+        const response = await axios.get(`${next}`);
+        response.data.results.map((element) => {
+          return respuesta.push(element);
+        });
+        next = response.data.next;
+        return next;
+      })
+      .then(async (next) => {
+        console.log("entro al 4to then");
+        const response = await axios.get(`${next}`);
+        response.data.results.map((element) => {
+          return respuesta.push(element);
+        });
+        next = response.data.next;
+        return next;
+      })
+      .then(async (next) => {
+        console.log("entro al 5to then");
+        const response = await axios.get(`${next}`);
+        response.data.results.map((element) => {
+          return respuesta.push(element);
+        });
+        next = response.data.next;
+        return next;
+      })
+      .catch((error) => {
+        return res.status(500).json(error);
+      });
+    console.timeEnd();
+    if (respuesta.length > 90) console.log("respuesta ok");
+    return res.json(respuesta);
+  }
+  /* let name = req.query.search;
+  let page = req.query.page;
+  console.log("-----entro a videogames----------");
+  console.log(req.query); */
   /*  if (!name && !page || !name && page === '1') {
     try {
       console.log('en la ejecucion correcta para page 1')  
@@ -146,6 +169,7 @@ router.get("/videogame/:id", async (req, res) => {
 });
 
 router.get("/genres", async (req, res) => {
+  console.log("adentro de pedido por generos back");
   let response = await axios.get(
     `https://api.rawg.io/api/genres?key=${API_KEY}`
   );
@@ -164,6 +188,7 @@ router.get("/genres", async (req, res) => {
     }
     return 0;
   });
+  console.log(generosFiltrados[0]);
   return res.json(generosFiltrados);
 });
 
@@ -179,9 +204,8 @@ router.post("/videogame", async (req, res) => {
     rating,
     plataforms,
     creator,
-    genres,
   };
-  console.log(genres);
+  
   let respuesta = await axios.get(
     `https://api.rawg.io/api/games?search=${videogame.name}&key=${API_KEY}`
   );
@@ -198,10 +222,18 @@ router.post("/videogame", async (req, res) => {
 
   if (game) return res.json({ error: "Este juego ya existe" });
   else {
-    await Videogame.create(videogame, { include: "genres" });
+    const juego = await Videogame.create(videogame);
 
-    /*  await juego.setGenres([genres]);   */
-
+    while (genres.length) {
+      let genre = genres.shift();
+      let nuevoGenre = await Genres.findAll({
+        where: {
+          name: { [Sequelize.Op.iLike]: `${genre}` },
+        },
+      });
+      await juego.addGenres(nuevoGenre);
+    }
+    console.log(juego)
     return res.status(200).json("El juego ha sido creado exitosamente");
   }
 });

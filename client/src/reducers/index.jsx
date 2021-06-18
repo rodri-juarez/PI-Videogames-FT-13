@@ -3,18 +3,22 @@ import {
   GET_VIDEOGAME,
   GET_VIDEOGAME_ID,
   ADD_VIDEOGAME,
+  GET_GENRES,
   /* NEXT_PAGE, */
   ORDENAR_ALFABETICAMENTE,
   ORDENAR_DESCENDENTEMENTE,
   ORDENAR_POR_RATING,
   CREATOR,
+  GENRES
 } from "../actions";
 
 const initialState = {
   videogames: [],
   videogameSearch: [],
   videogame: [],
+  genres: [],
   creator: [],
+  filterByGenres: []
 };
 
 
@@ -42,11 +46,12 @@ function reducer(state = initialState, action) {
       return {
         ...state,
       };
-    /* case NEXT_PAGE:
+      case GET_GENRES:
       return {
         ...state,
-        videogames: action.payload,
-      }; */
+        genres: action.payload,
+      };
+  
     case ORDENAR_ALFABETICAMENTE:
       return {
         ...state,
@@ -117,10 +122,21 @@ function reducer(state = initialState, action) {
         }),
       };
       case CREATOR:
-        let filtrado = state.videogames.filter((game) => game.creator)
+        let filterByCreator = state.videogames.filter((game) => game.creator)
         return {
           ...state,
-          creator: filtrado,
+          creator: filterByCreator,
+        };
+        case GENRES:
+          let genresGame = [];
+          console.log('en reducer por generos')
+          state.videogames.forEach((game) => {
+          if(game.genres.find(genre => genre.name === action.payload)) return genresGame.push(game)
+           })
+           console.log(genresGame[10])
+        return {
+          ...state,
+          filterByGenres: genresGame,
         }
     default:
       return state;

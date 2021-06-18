@@ -8,7 +8,6 @@ module.exports = (sequelize) => {
      id: {
       type: DataTypes.UUID,   
       primaryKey: true,  
-      
     }, 
 
 
@@ -37,11 +36,16 @@ module.exports = (sequelize) => {
     },    
 
     creator: {
-      type: DataTypes.TEXT,
+      type: DataTypes.TEXT,  
     },
   });  
 
   sequelize.define("genres", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     name: {
       type: DataTypes.TEXT, 
       allowNull: false,

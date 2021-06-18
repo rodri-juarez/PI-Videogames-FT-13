@@ -1,24 +1,33 @@
 import React from 'react';
-
-
+import Search from '../search'
+import style from './navBar.module.css'
 import { Link } from 'react-router-dom';
 
 
 
-function Nav() {
+function Nav({busquedaPorNombre}) {
   return (
-    <nav >
-      <Link to='/'>
-        <span >
-          Bienvenido
-        </span>
-      </Link>
-      <Link to='/Home'>
-        Home
-      </Link>
-        
-        
-    </nav>
+    <nav className={style.h1}>
+        {/*  Section NavBar - Home */}
+        <div className={style.link}>
+          <button>
+            <Link to="/Home">Home</Link>
+          </button>
+        </div>
+
+        {/*  Section de Busqueda */}
+
+        <div>
+          <Search onGameSearchChange={busquedaPorNombre} />
+        </div>
+
+        {/*  Section NavBar - Create Videogame */}
+        <div className={style.link2}>
+          <button>
+            <Link to="/CreateVideogame">Create Videogame</Link>
+          </button>
+        </div>
+      </nav>
   );
 };
 

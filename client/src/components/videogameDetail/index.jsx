@@ -17,7 +17,7 @@ export default function VideogameDetail(props){
     return (
     <>
     <h1>{id}</h1>
-    {/* <h3>{videogame.background_image}</h3> */}
+    <img src={videogame.background_image} alt='Imagen'></img>
     <div>{name}</div>
     {/* <div>{genres[0].name}</div> */}
     <div>{relesead}</div>
