@@ -61,7 +61,15 @@ export default function Home() {
     indexOfLastVideogame
   );
 
+  useEffect(() => {
+    window.scrollTo({ behavior: "smooth", top: "0px" });
+  }, [currentPage]);
+
   const paginate = (pageNumber) => setCurrentPage(pageNumber); // Funcion encargada de paginacion
+
+  const goToNextPage = () => setCurrentPage(currentPage + 1);
+
+  const goToPreviousPage = () => setCurrentPage(currentPage - 1);
 
   //-----------------Ordenadores (estados, useEffect y funciones)--(componente Ordenadores)-----------------
 
@@ -191,14 +199,20 @@ export default function Home() {
       {/*  Section de Paginacion */}
 
       <nav>
-        <Pagination
-          videogamesPerPage={videogamesPerPage}
-          totalVideogames={videogames.length}
-          paginate={paginate}
-        />
+        {videogames.length > 0 ? (
+          <Pagination
+            videogamesPerPage={videogamesPerPage}
+            totalVideogames={videogames.length}
+            paginate={paginate}
+            goToNextPage={goToNextPage}
+            goToPreviousPage={goToPreviousPage}
+          />
+        ) : (
+          <h1 className={style.h1Pagination}>No Videogames to display</h1>
+        )}
       </nav>
 
       <footer></footer>
     </>
-  )
+  );
 }

@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
       allowNull: false,  
     },
     
-    relesead: {
+    released: {
       type: DataTypes.DATEONLY,  
       allowNull: false,   
     },  
@@ -35,7 +35,7 @@ module.exports = (sequelize) => {
       type: DataTypes.NUMERIC,    
     }, 
 
-    image: {
+    background_image: {
       type: DataTypes.TEXT,
        
     },  

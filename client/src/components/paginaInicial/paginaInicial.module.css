@@ -4,15 +4,13 @@
 }
 
 .button{
-    display: flex;
-    justify-content: center;
-    /* align-items: center;
-    align-content: center; */
-    
-    width: 500px;
+    display: block;
+    justify-content: center; 
+    width: 440px;
     text-decoration: none;
-    margin-top: 170px;
-    margin-left: 20px;
+    margin-top: 100px;
+    margin-left: 150px;
+    border: red solid 1px
 }
 
 
@@ -21,19 +19,18 @@
     height: 750px;
     width: 1366px;
     background-image: url('https://media.rawg.io/media/games/4dd/4ddaecc5da9431e2fc7e9be1477ff31e.jpg');
-    /* background-image: url(https://media.rawg.io/media/games/4dd/4ddaecc5da9431e2fc7e9be1477ff31e.jpg); */
     background-repeat: no-repeat;
     background-size: contain;
 }
 
 .btn{
+    margin-left: 160px;
     width: 120px;
     height: 70px;
     font-weight: bold;
     border: none;
     border-radius: 50% ;
     background: rgb(255, 168, 86);
-    color: black;
     font-size: 1.1rem;    
     text-decoration: none;
 }
@@ -41,4 +38,10 @@
 .btn:hover{
    transition: 800ms;
    background: rgb(252, 124, 65);
+}
+
+.border{
+    border: red solid 1px;
+    display: flex;
+    justify-content: center;
 }

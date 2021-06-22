@@ -97,3 +97,11 @@
    height: 20px;
    width: 25px;
 }
+
+
+.h1Pagination{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    color: white;
+}

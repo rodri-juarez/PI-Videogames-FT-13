@@ -40,10 +40,10 @@ export function getVideogameID(id) {
   };
 }
 
-export function addVideogame({ name, description, relesead, rating, plataforms, creator, image, genres }) {
+export function addVideogame({ name, description, released, rating, plataforms, creator, background_image, genres }) {
   return async function (dispatch) {
      await axios.post(
-      'http://localhost:3001/videogame', { name, description, relesead, rating, plataforms, image, creator, genres } 
+      'http://localhost:3001/videogame', { name, description, released, rating, plataforms, background_image, creator, genres } 
     );
     dispatch({ type: "ADD_VIDEOGAME"})
 }}

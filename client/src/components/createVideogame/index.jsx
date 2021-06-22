@@ -9,7 +9,7 @@ export default function CreateVideogame() {
   const dispatch = useDispatch();
   /* const imagenes=[]; */
   const [newVideogame, setNewVideogame] = useState({
-    image:'https://media.rawg.io/media/screenshots/8ba/8ba023119cc83dff0d1d535f12e6b348.jpg',
+    background_image:'https://media.rawg.io/media/screenshots/8ba/8ba023119cc83dff0d1d535f12e6b348.jpg',
     creator: "usuario",
     genres: [],
     plataforms: [],
@@ -17,7 +17,7 @@ export default function CreateVideogame() {
   const [newGenre, setNewGenre] = useState([]);
   const [newPlatform, setNewPlatform] = useState([]);
 
-  const { name, relesead, plataforms, genres, rating, description, image,  creator } =
+  const { name, released, plataforms, genres, rating, description, background_image,  creator } =
     newVideogame;
 
   if (generos.length === 0) dispatch(getGenres());
@@ -28,12 +28,12 @@ export default function CreateVideogame() {
     dispatch(
       addVideogame({
         name,
-        relesead,
+        released,
         plataforms,
         genres,
         rating,
         description,
-        image,
+        background_image,
         creator,
       })
     );
@@ -87,16 +87,16 @@ export default function CreateVideogame() {
           />
         </div>
         <div>
-          <label className={style.label} for="Relesead">
-            Relesead:{" "}
+          <label className={style.label} for="Released">
+            Released:{" "}
           </label>
           <input
             className={style.input}
             type="date"
-            name="Relesead"
-            placeholder="Relesead..."
+            name="Released"
+            placeholder="Released..."
             onChange={(e) =>
-              setNewVideogame({ ...newVideogame, relesead: e.target.value })
+              setNewVideogame({ ...newVideogame, released: e.target.value })
             }
             required
           />
@@ -169,14 +169,14 @@ export default function CreateVideogame() {
         </select>
 
         <button className="submit" type="submit">
-          Create!
+          Create Videogame
         </button>
 
         <button
           className="addGenre"
           onClick={() => setNewGenre([...newGenre, "x"])}
         >
-          Add genre
+          Add Genre
         </button>
         <button
           className="addPlatform"

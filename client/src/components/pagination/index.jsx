@@ -1,6 +1,13 @@
-import style from './pagination.module.css'
+import style from "./pagination.module.css";
+/* import BottomPagination from './bottom/bottomPagination'; */
 
-export default function Pagination ({ videogamesPerPage, totalVideogames, paginate }) {
+export default function Pagination({
+  videogamesPerPage,
+  totalVideogames,
+  paginate,
+  goToNextPage,
+  goToPreviousPage,
+}) {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalVideogames / videogamesPerPage); i++) {
@@ -9,48 +16,31 @@ export default function Pagination ({ videogamesPerPage, totalVideogames, pagina
 
   return (
     <nav className={style.nav}>
-      <ul className={style.ul}>
-        {pageNumbers.map(number => (
-          <li key={number} className={style.li}>
-            <button onClick={() => paginate(number)}  >
-              {number}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
-
-
-
-
-
-
-
-/* export default function Pagination() {
-  const dispatch = useDispatch();
-  
-
-  return (
-    <>
-      <div>
-      <button
-          onClick={() => {
-            dispatch(getVideogames());
-          }}
-        >
-          Previous
-        </button>
+      <div className={style.ul}>
         <button
-          onClick={() => {
-            dispatch(getVideogames());
-          }}
+          onClick={goToPreviousPage}
+          className={style.btn}
+        >
+          Prev
+        </button>
+        {pageNumbers.map((number) => (
+          <button
+            key={number}
+            className={style.btnNumber}
+            onClick={() => paginate(number)}
+          >
+            {number}
+          </button>
+        ))}
+
+        <button
+          onClick={goToNextPage}
+          className={style.btn}
         >
           Next
         </button>
-
       </div>
-    </>
+    </nav>
   );
-} */
+}
+
