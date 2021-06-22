@@ -10,12 +10,14 @@ import {
   getGenres,
   ordenarPorGenres,
 } from "../../actions";
-import Videogames from "../../components/Videogames";
+import Videogames from "../../components/videogames/Videogames";
 import style from "./Home.module.css";
 import Nav from "../../components/nav/Nav";
 import Filtros from "../../components/filtros/Filtros";
 import Pagination from "../../components/pagination/index";
 import Ordenadores from "../../components/ordenadores/Ordenadores";
+import { GiBattleMech } from "react-icons/gi";
+import { IconContext } from "react-icons";
 
 export default function Home() {
   const videogames = useSelector((store) => store.videogames);
@@ -26,9 +28,9 @@ export default function Home() {
   useEffect(() => {
     console.log("entro a getVideogames");
     if (videogames.length === 0) dispatch(getVideogames()); // Cuando se monta el componente, se pide al back los videogames
-    if (genres.length === 0) dispatch(getGenres())
+    if (genres.length === 0) dispatch(getGenres());
   }, [dispatch, genres, videogames]);
-   console.log(videogames[1])
+
   //----------------------------------Busqueda por nombre (componente Search)---------------------------------
   const gameSearch = useSelector((store) => store.videogameSearch);
   const [busqueda, setBusqueda] = useState(false);
@@ -116,19 +118,52 @@ export default function Home() {
     }
   }, [dispatch, render, byGenres]);
 
-
   //-----------------------------------------------------------RETURN----------------------------------------------------------------------
   return (
     <>
       {/*  Section NavBar */}
 
-      <nav>
+      <nav className={style.nav}>
         <Nav busquedaPorNombre={busquedaPorNombre} />
       </nav>
 
       {/*  Section de Ordenamiento */}
 
       <div className={style.divFiltros}>
+        <IconContext.Provider
+          value={{
+            style: {
+              fontSize: "75px",
+              color: "rgb(0, 0, 0)",
+              marginTop: "15px",
+            },
+          }}
+        >
+          <div
+            style={{
+              marginRight: "30px",
+            }}
+          >
+            <GiBattleMech />
+          </div>
+        </IconContext.Provider>
+
+        <h1 className={style.titulo}>Henry Games</h1>
+
+        <IconContext.Provider
+          value={{ style: { fontSize: "75px", color: "rgb(0, 0, 0)" } }}
+        >
+          <div
+            style={{
+              marginLeft: "30px",
+            }}
+          >
+            <GiBattleMech />
+          </div>
+        </IconContext.Provider>
+      </div>
+
+      <div className={style.filtros}>
         <Ordenadores
           setOrdenAlfabetico={setOrdenAlfabetico}
           setDescendente={setDescendente}
@@ -143,7 +178,7 @@ export default function Home() {
 
       {/*  Section de Videogames */}
 
-      <section>
+      <section className={style.section}>
         <Videogames
           render={render}
           gameSearch={gameSearch}
@@ -165,5 +200,5 @@ export default function Home() {
 
       <footer></footer>
     </>
-  );
+  )
 }

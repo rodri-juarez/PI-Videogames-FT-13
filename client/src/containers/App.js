@@ -1,29 +1,35 @@
 import React from "react";
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch} from "react-router-dom";
 import "./App.css";
-import Home from './home/index'
-import Page from "../components/paginaInicial";
-import PageCreated from "../components/pageCreate";
-import VideogameDetail from '../components/videogameDetail/index.jsx'
-
-
+import Home from "./home/index";
+import CreateVideogame from "../components/createVideogame";
+import VideogameDetail from "../components/videogameDetail/index.jsx";
+import PaginaInicial from "../components/paginaInicial/PaginaInicial";
+import NotFound from '../components/notFound'
 
 function App() {
- 
   return (
     <div>
       <Router>
-      <Route exact path='/'><Page /></Route>
-      <Route exact path='/Home'><Home /></Route>
-      <Route exact path='/CreateVideogame'><PageCreated /></Route>
-      <Route exact path='/Videogame/:id'
-    render={({match}) => <VideogameDetail
-          id={match.params.id}
-        />} /> 
+        
+        <Switch>
+          <Route exact path='/'> <PaginaInicial /> </Route>
+          <Route exact path="/Home">
+            <Home />
+          </Route>
+          <Route exact path="/CreateVideogame">
+          <CreateVideogame />
+          </Route>
+          <Route
+            exact
+            path="/Videogame/:id"
+            render={({ match }) => <VideogameDetail id={match.params.id} />}
+          />
+          <Route path='*'><NotFound /></Route>
+        </Switch>
       </Router>
     </div>
   );
 }
 
 export default App;
-  

@@ -1,0 +1,23 @@
+
+.container {
+    border: red solid 1px;
+    width: 500px;
+    height: 20vw;
+    display: block;
+    position: absolute;
+    top: 10vw;
+    left: 30vw;
+}
+
+.label{
+    width: 200px;
+    margin: 20px;
+    /* border: red solid 1px; */
+    
+}
+
+.input{
+    width: 200px;
+    margin-right: 100px;
+    /* border: red solid 1px; */
+}

@@ -4,16 +4,16 @@ const axios = require("axios").default;
 const { Sequelize } = require("sequelize");
 const { Videogame, Genres } = require("../db.js");
 const { v4: uuidv4 } = require("uuid");
-
+  
 // Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
+// Ejemplo: const authRouter = require('./auth.js');      
 
-const API_KEY = process.env.VIDEOGAMES_API_KEY;
+const API_KEY = process.env.VIDEOGAMES_API_KEY;  
 const router = Router();
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter);
-
+// Configurar los routers      
+// Ejemplo: router.use('/auth', authRouter);     
+  
 router.get("/videogames", async (req, res) => {
   let name = req.query.search;
   const respuesta = [];
@@ -34,9 +34,9 @@ router.get("/videogames", async (req, res) => {
         console.log(next);
         return next;
       })
-      .then(async (next) => {
+      /* .then(async (next) => {
         console.log("entro a 2do then");
-        const response = await axios.get(`${next}`);
+        const response = await axios.get(`${next}`);  
 
         response.data.results.map((element) => {
           return respuesta.push(element);
@@ -71,7 +71,7 @@ router.get("/videogames", async (req, res) => {
         });
         next = response.data.next;
         return next;
-      })
+      }) */
       .catch((error) => {
         return res.status(500).json(error);
       });
@@ -180,7 +180,7 @@ router.get("/genres", async (req, res) => {
   const generos = await Genres.findAll();
 
   const generosFiltrados = generos.sort(function (a, b) {
-    if (a.id > b.id) {
+    if (a.id > b.id) {  
       return 1;
     }
     if (a.id < b.id) {
@@ -188,13 +188,13 @@ router.get("/genres", async (req, res) => {
     }
     return 0;
   });
-  console.log(generosFiltrados[0]);
+  
   return res.json(generosFiltrados);
 });
 
 router.post("/videogame", async (req, res) => {
   const id = uuidv4();
-  let { name, description, relesead, rating, plataforms, creator, genres } =
+  let { name, description, relesead, rating, plataforms, creator, image, genres } =
     req.body;
   let videogame = {
     id,
@@ -203,6 +203,7 @@ router.post("/videogame", async (req, res) => {
     relesead,
     rating,
     plataforms,
+    image,
     creator,
   };
   
@@ -214,10 +215,10 @@ router.post("/videogame", async (req, res) => {
   if (respuesta) {
     let filtro = respuesta.data.results.find(
       (elemento) => elemento.name === videogame.name
-    );
+    ); 
     if (filtro) return res.json({ error: "Este juego ya existe" });
   }
-
+  
   const game = await Videogame.findOne({ where: { name: videogame.name } });
 
   if (game) return res.json({ error: "Este juego ya existe" });

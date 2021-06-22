@@ -5,28 +5,29 @@ export default function Ordenadores ({setOrdenAlfabetico, setDescendente, setRat
 
     return (
         <div className={style.prueba}>
-        <button
+          <label className={style.label}>Order by:</label>
+        <button className={style.btn}
           onClick={() => {
             setOrdenAlfabetico(true);
           }}
         >
-          ordenar alf
+          Alfabetic
         </button>
 
-        <button
+        <button className={style.btn}
           onClick={() => {
             setDescendente(true);
           }}
         >
-          ordenar descendentemente
+          Asc / Desc
         </button>
 
-        <button
+        <button className={style.btn}
           onClick={() => {
             setRating(true);
           }}
         >
-          ordenar por rating
+          Rating
         </button>
 
         

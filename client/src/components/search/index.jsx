@@ -1,47 +1,36 @@
 import React, { useState } from "react";
+import style from "./search.module.css";
 
-
-export default function SearchBar({onGameSearchChange}) {
-  
-
-  const [name, setName] = useState()
-
-
+export default function SearchBar({ onGameSearchChange }) {
+  const [name, setName] = useState();
 
   function handleChange(e) {
     setName(e.target.value);
   }
-  
+
   function handleSubmit(e) {
     e.preventDefault();
-    onGameSearchChange(name)
+    onGameSearchChange(name);
     /* dispatch(getVideogame(videogame)); */
   }
-  console.log('en search')
-  
-  
-  
+
   return (
-    <>
-      <form onSubmit={(e) => handleSubmit(e) }>
-        <div>
-          <label /* className="label" htmlFor="title" */>
-            Search:{" "}
-          </label>
-          <input
-            type="text"
-            id="videogame"
-            autoComplete="off"
-            onChange={(e) => handleChange(e)}
-          />
-          
-        </div>
-        <button type="submit">BUSCAR</button>
+    <div className={style.search}>
+      <form onSubmit={(e) => handleSubmit(e)}>
+      <button className={style.btn} type="submit">
+          BUSCAR
+        </button>
+        <input className={style.input}
+          type="text"
+          id="videogame"
+          autoComplete="off"
+          onChange={(e) => handleChange(e)}
+        />
+        
       </form>
-    </>
+    </div>
   );
 }
-
 
 /* export default function SearchBar() {
   const juego = useSelector(store => store.videogameSearch)
@@ -67,9 +56,9 @@ export default function SearchBar({onGameSearchChange}) {
       <form onSubmit={(e) => handleSubmit(e)}>
         <div>
           <label /* className="label" htmlFor="title" */
-          //>
-          //*Search:{" "}
-          /* </label>
+//>
+//*Search:{" "}
+/* </label>
           <input
             type="text"
             id="videogame"
@@ -83,5 +72,3 @@ export default function SearchBar({onGameSearchChange}) {
     </>
   );
 } */
-
-

@@ -1,16 +1,42 @@
+:root {
+    background-color: rgb(42, 42, 42);
+  }
+
 .h1{
     height: 100px;
    display: flex;
    justify-content: center;
    align-items: center;
-   border: black solid 1px;
+  
+}
+
+
+.filtros{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: brown solid 5px; */
+    font-family: 'Bangers', cursive;
+    height: 100px;
+}
+
+
+.nav{
+    display: flex;
+    
+}
+
+.titulo{
+    font-size: 3rem;
+    /* font-family: 'Bangers', cursive; */
+    font-family: 'Press Start 2P', cursive;
 }
 
 .link{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: black solid 1px;
+    
     height: 40px;
     width: 150px;
     margin: 50px;
@@ -22,7 +48,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: black solid 1px;
+    
     height: 40px;
     width: 150px;
     margin: 50px;
@@ -31,11 +57,12 @@
 }
 
 .divFiltros{
-    height: 100px;
+    height: 120px;
     display: flex;
     justify-content: center;
     align-items: baseline;
-    border: black solid 1px;
+    /* border: brown solid 5px; */
+    background-color: rgb(243, 127, 73);
 }
 
 .prueba1{
@@ -52,5 +79,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border: black solid 1px;
+    
+}
+
+.section {
+    /* border: blue solid 5px; */
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items:center;
+    justify-content:space-evenly;
+    width:100vw;
+    background-color: rgb(18,18,18);
+    
+}
+
+.btn {
+   height: 20px;
+   width: 25px;
 }

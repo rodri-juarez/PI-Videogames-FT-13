@@ -10,20 +10,20 @@ export default function VideogameDetail(props){
     useEffect(()=>{
       if(videogame.length === 0) dispatch(getVideogameID(id))
     }, [dispatch, videogame, id])
-     console.log('adentro de videogame detail')
-     console.log(videogame)
-     console.log(genres)
-     
+    
+    let text='';
+    if(description) text = description.replace(/(<([^>]+)>)/ig, '')
+
     return (
     <>
     <h1>{id}</h1>
-    <img src={videogame.background_image} alt='Imagen'></img>
+    <img src={background_image} alt='Imagen'></img>
     <div>{name}</div>
-    {/* <div>{genres[0].name}</div> */}
+    {genres && genres.map((genre) =>{ return <div>{genre.name}</div>})}
     <div>{relesead}</div>
     <div>{rating}</div>
-    {/* <div>{plataforms[0].name}</div> */}
-    <div>{description}</div>
+    {plataforms && plataforms.map((plataform) =>{ return <div>{plataform.name}</div>})}
+    <div>{text}</div>
     </>
     )  
 }

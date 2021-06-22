@@ -82,13 +82,23 @@ function reducer(state = initialState, action) {
           }
           return 0;
         }),
+        filterByGenres: state.filterByGenres.sort(function (a, b) {
+          if (a.name > b.name) {
+            return 1;
+          }
+          if (a.name < b.name) {
+            return -1;
+          }
+          return 0;
+        }),
       };
     case ORDENAR_DESCENDENTEMENTE:
       return {
         ...state,
         videogames: state.videogames.reverse(),
         videogameSearch: state.videogameSearch.reverse(),
-        creator: state.creator.reverse()
+        creator: state.creator.reverse(),
+        filterByGenres: state.filterByGenres.reverse(),
       };
     case ORDENAR_POR_RATING:
       return {
@@ -120,6 +130,15 @@ function reducer(state = initialState, action) {
           }
           return 0;
         }),
+        filterByGenres: state.filterByGenres.sort(function (a, b) {
+          if (a.rating > b.rating) {
+            return 1;
+          }
+          if (a.rating < b.rating) {
+            return -1;
+          }
+          return 0;
+        }),
       };
       case CREATOR:
         let filterByCreator = state.videogames.filter((game) => game.creator)
@@ -129,11 +148,10 @@ function reducer(state = initialState, action) {
         };
         case GENRES:
           let genresGame = [];
-          console.log('en reducer por generos')
           state.videogames.forEach((game) => {
           if(game.genres.find(genre => genre.name === action.payload)) return genresGame.push(game)
            })
-           console.log(genresGame[10])
+           
         return {
           ...state,
           filterByGenres: genresGame,

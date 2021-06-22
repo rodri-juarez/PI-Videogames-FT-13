@@ -1,5 +1,4 @@
-/* import { getVideogames } from "../../actions";
-import { useDispatch } from "react-redux"; */
+import style from './pagination.module.css'
 
 export default function Pagination ({ videogamesPerPage, totalVideogames, paginate }) {
   const pageNumbers = [];
@@ -9,10 +8,10 @@ export default function Pagination ({ videogamesPerPage, totalVideogames, pagina
   }
 
   return (
-    <nav>
-      <ul >
+    <nav className={style.nav}>
+      <ul className={style.ul}>
         {pageNumbers.map(number => (
-          <li key={number} className='page-item'>
+          <li key={number} className={style.li}>
             <button onClick={() => paginate(number)}  >
               {number}
             </button>
