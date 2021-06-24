@@ -5,7 +5,6 @@ export const GET_VIDEOGAME = "GET_VIDEOGAME";
 export const GET_VIDEOGAME_ID = "GET_VIDEOGAME_ID"
 export const ADD_VIDEOGAME = "ADD_VIDEOGAME";
 export const GET_GENRES = "GET_GENRES";
-
 export const ORDENAR_ALFABETICAMENTE =  "ORDENAR_ALFABETICAMENTE";
 export const ORDENAR_DESCENDENTEMENTE = "ORDENAR_DESCENDENTEMENTE";
 export const ORDENAR_POR_RATING = "ORDENAR_POR_RATING";
@@ -57,44 +56,28 @@ export function getGenres() {
     dispatch({ type: "GET_GENRES", payload: response.data });
   };
 }
-
    
 export function ordenarAlfabeticamente() {
   
-  console.log('ejecucion de ordenarAlfabeticamente')
-
   return { type: "ORDENAR_ALFABETICAMENTE"};
-
 }
 
 export function ordenarDescendentemente() {
-  
-  console.log('ejecucion de ordenarDescendentemente')
 
   return { type: "ORDENAR_DESCENDENTEMENTE"};
-
 }
 
 export function ordenarPorRating() {
-  
-  console.log('ejecucion de ordenar por Rating')
 
   return { type: "ORDENAR_POR_RATING"};
-
 }
 
-export function ordenarPorCreator() {
-  
-  console.log('ejecucion de ordenar por CREADOR')
+export function ordenarPorCreator(creator) {
 
-  return { type: "CREATOR"};
-
+  return { type: "CREATOR", payload: creator};
 }
 
 export function ordenarPorGenres(genre) {
-  console.log(genre)
-  console.log('ejecucion de ordenar por GENRES')
 
-  return { type: "GENRES", payload: genre};
-
+    return { type: "GENRES", payload: genre};
 }

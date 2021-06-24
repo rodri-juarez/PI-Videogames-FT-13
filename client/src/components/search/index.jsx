@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import style from "./search.module.css";
 import { FaSearch } from "react-icons/fa";
 
-export default function SearchBar({ onGameSearchChange }) {
+function SearchBar({ busquedaPorNombre }) {
   const [name, setName] = useState();
 
   function handleChange(e) {
@@ -11,14 +11,14 @@ export default function SearchBar({ onGameSearchChange }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onGameSearchChange(name);
+    busquedaPorNombre(name);
   }
 
   return (
     <div className={style.search}>
       <form onSubmit={(e) => handleSubmit(e)}>
         <button
-          placeholder="Search videogame"
+          
           className={style.btn}
           type="submit"
         >
@@ -26,6 +26,7 @@ export default function SearchBar({ onGameSearchChange }) {
         </button>
         <input
           className={style.input}
+          placeholder="Search videogame"
           type="text"
           id="videogame"
           autoComplete="off"
@@ -35,3 +36,5 @@ export default function SearchBar({ onGameSearchChange }) {
     </div>
   );
 }
+
+export default React.memo(SearchBar)

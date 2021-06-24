@@ -6,11 +6,10 @@
 .button{
     display: block;
     justify-content: center; 
-    width: 440px;
+    width: 600px;
     text-decoration: none;
-    margin-top: 100px;
-    margin-left: 150px;
-    border: red solid 1px
+    margin-top: 140px;
+    margin-left: 75px;
 }
 
 
@@ -24,7 +23,7 @@
 }
 
 .btn{
-    margin-left: 160px;
+    margin-left: 220px;
     width: 120px;
     height: 70px;
     font-weight: bold;
@@ -40,8 +39,9 @@
    background: rgb(252, 124, 65);
 }
 
-.border{
-    border: red solid 1px;
+.h1{
     display: flex;
     justify-content: center;
+    font-size: 2.5rem;
+
 }

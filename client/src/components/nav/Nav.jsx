@@ -8,17 +8,11 @@ import { Link } from 'react-router-dom';
 function Nav({busquedaPorNombre}) {
   return (
     <nav className={style.h1}>
-        {/*  Section NavBar - Home */}
-        {/* <div className={style.link}>
-          <button>
-            <Link to="/Home">Home</Link>
-          </button>
-        </div> */}
-
+        
         {/*  Section de Busqueda */}
 
         <div className={style.div}>
-          <Search onGameSearchChange={busquedaPorNombre} />
+          <Search busquedaPorNombre={busquedaPorNombre} />
         </div>
 
         {/*  Section NavBar - Create Videogame */}
@@ -31,4 +25,4 @@ function Nav({busquedaPorNombre}) {
   );
 };
 
-export default Nav;
+export default React.memo(Nav)

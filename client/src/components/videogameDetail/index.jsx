@@ -18,8 +18,8 @@ export default function VideogameDetail(props) {
   } = videogame;
 
   useEffect(() => {
-    if (videogame.length === 0) dispatch(getVideogameID(id));
-  }, [dispatch, videogame, id]);
+    dispatch(getVideogameID(id));
+  }, [dispatch, id]);
 
   let text = "";
   if (description) text = description.replace(/(<([^>]+)>)/gi, "");

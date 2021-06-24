@@ -9,7 +9,7 @@ export default function PaginaInicial () {
             
             <div className={style.button}>
                
-                <h1 className={style.border}>Welcome to Henry Games!</h1>
+                <h1 className={style.h1}>Welcome to Henry Games!</h1>
             
            <button className={style.btn}> <Link className={style.link} to='/Home'> HOME</Link></button>
            </div>

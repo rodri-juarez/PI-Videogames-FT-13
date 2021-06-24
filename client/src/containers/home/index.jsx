@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback, Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getVideogames,
@@ -10,7 +10,7 @@ import {
   getGenres,
   ordenarPorGenres,
 } from "../../actions";
-import Videogames from "../../components/videogames/Videogames";
+/* import Videogames from "../../components/videogames/Videogames"; */
 import style from "./Home.module.css";
 import Nav from "../../components/nav/Nav";
 import Filtros from "../../components/filtros/Filtros";
@@ -19,16 +19,23 @@ import Ordenadores from "../../components/ordenadores/Ordenadores";
 import { GiBattleMech } from "react-icons/gi";
 import { IconContext } from "react-icons";
 
+const Videogames = React.lazy(()=> import('../../components/videogames/Videogames'))
+
 export default function Home() {
   const videogames = useSelector((store) => store.videogames);
   const genres = useSelector((store) => store.genres);
   const dispatch = useDispatch();
-  const [render, setRender] = useState("videogames"); // Estado que maneja que es lo que se renderiza en el componente
+  const [render, setRender] = useState("videogames"); // Estado que maneja que es lo que se renderiza en el componente^
+  const [ordenadores, setOrdenadores] = useState(false);
+  const [filtros, setFiltros] = useState(false);
+
 
   useEffect(() => {
     console.log("entro a getVideogames");
     if (videogames.length === 0) dispatch(getVideogames()); // Cuando se monta el componente, se pide al back los videogames
-    if (genres.length === 0) dispatch(getGenres());
+    if (genres.length === 0) {
+      console.log('buscando generos')
+      return dispatch(getGenres())}
   }, [dispatch, genres, videogames]);
 
   //----------------------------------Busqueda por nombre (componente Search)---------------------------------
@@ -44,9 +51,9 @@ export default function Home() {
   }, [dispatch, busqueda]);
 
   // funcion que setea estado que activa busqueda por nombre
-  function busquedaPorNombre(nombre) {
+  const busquedaPorNombre = useCallback((nombre) => {
     setBusqueda(nombre);
-  }
+  }, [])
 
   //--------------------------------Paginacion------------------------
   // Estados usados para paginacion
@@ -95,33 +102,50 @@ export default function Home() {
     }
   }, [dispatch, ordenAlfabetico, descendente, rating]);
 
+  const setOrdenAlfabeticoChange = useCallback(()=>{
+    setOrdenAlfabetico(true)
+  }, [])
+
+  const setDescendenteChange = useCallback(()=>{
+    setDescendente(true)
+  }, [])
+
+  const setRatingChange = useCallback(()=>{
+    setRating(true)
+  }, [])
+
+  const noOrder = useCallback(() => {
+    dispatch(getVideogames())
+    return setOrdenadores(false)
+}, [dispatch])
+
   //------------ -------Filtros (estados, useEffect y funciones)-------------------------
 
   //------------------------------FILTRO POR CREATOR------------------------------------
   const gamesCreator = useSelector((store) => store.creator);
   const [creator, setCreator] = useState(false);
 
+  const noFilter = useCallback(() => {
+    setRender("videogames");
+    return setFiltros(false);
+  }, [])
+
   useEffect(() => {
-    if (creator && render !== "gamesCreator") {
-      dispatch(ordenarPorCreator());
+    if (creator) {
+      dispatch(ordenarPorCreator(creator));
       setCreator(false);
       return setRender("gamesCreator");
     }
   }, [dispatch, creator, render]);
-
-  function filtroPorCreador() {
-    setCreator(true);
-  }
 
   //------------------------------FILTRO POR GENEROS------------------------------------
   const filterByGenres = useSelector((store) => store.filterByGenres);
   const [byGenres, setByGenres] = useState(false);
 
   useEffect(() => {
-    if (byGenres && render !== "gamesByGenres") {
+    if (byGenres) {
       dispatch(ordenarPorGenres(byGenres));
       setByGenres(false);
-      console.log("seteando por genres");
       return setRender("gamesByGenres");
     }
   }, [dispatch, render, byGenres]);
@@ -163,7 +187,7 @@ export default function Home() {
         >
           <div
             style={{
-              marginLeft: "30px",
+              marginLeft: "20px",
             }}
           >
             <GiBattleMech />
@@ -172,21 +196,38 @@ export default function Home() {
       </div>
 
       <div className={style.filtros}>
-        <Ordenadores
-          setOrdenAlfabetico={setOrdenAlfabetico}
-          setDescendente={setDescendente}
-          setRating={setRating}
-        />
-        <Filtros
-          filtroPorCreador={filtroPorCreador}
-          setByGenres={setByGenres}
-          genres={genres}
-        />
+        {!ordenadores && (
+          <button className={style.btnFilter} onClick={() => setOrdenadores(true)}>
+            Order
+          </button>
+        )}
+        {ordenadores && (
+          <Ordenadores
+            setOrdenAlfabeticoChange={setOrdenAlfabeticoChange}
+            setDescendenteChange={setDescendenteChange}
+            setRatingChange={setRatingChange}
+            noOrder={noOrder}
+          />
+        )}
+        {!filtros && (
+          <button className={style.btnFilter} onClick={() => setFiltros(true)}>
+            Filter
+          </button>
+        )}
+        {filtros && (
+          <Filtros
+            setCreator={setCreator}
+            setByGenres={setByGenres}
+            genres={genres}
+            noFilter={noFilter}
+          />
+        )}
       </div>
 
       {/*  Section de Videogames */}
 
       <section className={style.section}>
+        <Suspense fallback={null} >
         <Videogames
           render={render}
           gameSearch={gameSearch}
@@ -194,6 +235,7 @@ export default function Home() {
           filterByGenres={filterByGenres}
           currentVideogames={currentVideogames}
         />
+        </Suspense>
       </section>
 
       {/*  Section de Paginacion */}
@@ -207,12 +249,11 @@ export default function Home() {
             goToNextPage={goToNextPage}
             goToPreviousPage={goToPreviousPage}
           />
-        ) : (
-          <h1 className={style.h1Pagination}>No Videogames to display</h1>
-        )}
+        ) : <h1 className={style.h1Pagination}>No Videogames to display</h1>}
       </nav>
 
       <footer></footer>
     </>
   );
 }
+

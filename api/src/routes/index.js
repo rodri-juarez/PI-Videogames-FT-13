@@ -79,47 +79,7 @@ router.get("/videogames", async (req, res) => {
     if (respuesta.length > 90) console.log("respuesta ok");
     return res.json(respuesta);
   }
-  /* let name = req.query.search;
-  let page = req.query.page;
-  console.log("-----entro a videogames----------");
-  console.log(req.query); */
-  /*  if (!name && !page || !name && page === '1') {
-    try {
-      console.log('en la ejecucion correcta para page 1')  
-      const respuesta = [];
-      const respuestaBase = await Videogame.findAll({ include: Genres });
-      respuestaBase.forEach((element) => {
-        if (respuesta.length <= 14) respuesta.push(element);
-      });
-      let response = await axios.get(
-        `https://api.rawg.io/api/games?key=${API_KEY}`
-      );
-      
-      response.data.results.forEach((element) => {
-        if (respuesta.length <= 14) respuesta.push(element);
-      });
-      return res.json(respuesta);
-    } catch (error) {
-      res.status(500).json({ error: "error del servidor" });
-    }
-  } 
-  console.log(page)      
-  if ( !name && page) {
-     console.log('entro a ejecucion correcta para paginacion')
-    try {
-      const filtrado = [];
-      
-      let respuesta = await axios.get(
-        `https://api.rawg.io/api/games?page=${page}&key=${API_KEY}`
-      );
-      respuesta.data.results.forEach((element) => {
-        if (filtrado.length <= 14) filtrado.push(element);
-      });
-      return res.json(filtrado);
-    } catch (error) {
-      res.status(500).json({ error: "error del servidor" });
-    }
-  }   */
+  
 
   if (name) {
     console.log("entro a ejecucion de query por name");
@@ -220,7 +180,7 @@ router.post("/videogame", async (req, res) => {
   let respuesta = await axios.get(
     `https://api.rawg.io/api/games?search=${videogame.name}&key=${API_KEY}`
   );
-  console.log("-----respuesta api");
+  console.log("-----respuesta api");     
 
   if (respuesta) {
     let filtro = respuesta.data.results.find(

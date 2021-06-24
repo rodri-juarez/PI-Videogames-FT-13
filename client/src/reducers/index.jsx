@@ -141,7 +141,9 @@ function reducer(state = initialState, action) {
         }),
       };
       case CREATOR:
-        let filterByCreator = state.videogames.filter((game) => game.creator)
+        let filterByCreator =[];
+        if(action.payload === 'Rawg Games' || action.payload === '---') filterByCreator = state.videogames.filter((game) => !game.creator)
+        if(action.payload === 'Usuario') filterByCreator = state.videogames.filter((game) => game.creator)
         return {
           ...state,
           creator: filterByCreator,

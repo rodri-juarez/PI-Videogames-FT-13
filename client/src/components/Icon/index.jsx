@@ -40,7 +40,7 @@ export default function Icon({ name }) {
   return (
     <>
       <IconContext.Provider
-        value={{ style: { fontSize: "20px", color: "rgb(125, 125, 125)" } }}
+        value={{ style: { fontSize: "22px", color: "rgb(140, 140, 140)" } }}
       >
         <div
           style={{
