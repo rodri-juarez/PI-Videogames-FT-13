@@ -25,35 +25,32 @@ describe('Videogame routes', () => {
     .then(() => Videogame.create(videogame)));
   describe('GET /videogames', () => {
     it('should get 200', () =>
-      agent.get('/videogames').expect(200)   
+      agent.get('/videogames').expect(200).then(() => done('terminado')).catch(() => done())   
     );
   });
 });
 
 
 
+describe('Genres router', () =>{
+  before(()=> conn.authenticate()
+  .catch((err)=>{
+    console.error('Unable to connect to the database:', err);
+  }))
 
-describe('Genres ', () => {
-  describe('GET /genres', () => {
-    it('should get 19', () =>
-      agent.get('/genres').toHaveLength(19)    
-    );
-    it('should get 200', () =>
-      agent.get('/genres').expect(200)
-    );
-  });
-});
-
-
-
-describe('Modelos de DB ', () => {
-  describe('GET /genres', () => {
-    it('should get 19', () =>
-      agent.get('/genres').toHaveLength(19)    
-    );
-    it('should get 200', () =>
-      agent.get('/genres').expect(200)
-    );
-  });
-});
-
+describe('GET /genres', ()=>{
+  it('should return an object with the genres', () =>{
+    agent.get('/genres').expect(200)
+  })
+  it('should have id, name, createdAt and updatedAt properties on each object', () =>{
+    agent.get('/genres')
+    .then(res => expect(res[0]).to.have.all.keys(['id', 'name', 'createdAt', 'updatedAt']))
+  })
+  it('should have 19 objects/genres on the array', () =>{
+    agent.get('/genres')
+    .then(res => expect(res.length).to.be.equal(19))
+  })
+})
+})
+   
+  

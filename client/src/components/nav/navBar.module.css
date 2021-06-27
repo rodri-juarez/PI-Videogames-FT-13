@@ -1,21 +1,22 @@
 .h1{
     height: 100px;
-   display: flex;
+    width: 97vw;
+   display: inline-flex;
    justify-content: center;
    align-items: center;
 
+  /*  border: rgb(156, 156, 156) solid 10px; */
 }
 
 .link{
     display: flex;
-    justify-content: center;
+    justify-content:center;
     align-items: center;
     /* border: black solid 1px; */
     height: 40px;
     width: 150px;
     margin: 50px;
-    position: absolute;
-    left: 0;
+    
 }
 
 
@@ -23,7 +24,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: black solid 1px; */
     height: 40px;
     width: 300px;
     margin: 50px;
@@ -35,6 +35,8 @@
     display: inline-flex;
     width: 500px;
     /* border: red solid 1px; */
+    position: absolute;
+    left: 0;
 }
 
 .btn {

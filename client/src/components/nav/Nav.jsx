@@ -15,13 +15,21 @@ function Nav({busquedaPorNombre}) {
           <Search busquedaPorNombre={busquedaPorNombre} />
         </div>
 
+        <div className={style.link}>
+          <button className={style.btn}>
+            <Link className={style.Link} to="/About">About</Link>
+          </button>
+        </div>
+
         {/*  Section NavBar - Create Videogame */}
         <div className={style.link2}>
           <button className={style.btn}>
             <Link className={style.Link} to="/CreateVideogame">CREATE VIDEOGAME</Link>
           </button>
         </div>
-      </nav>
+
+      
+    </nav>
   );
 };
 
