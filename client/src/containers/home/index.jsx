@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, Suspense } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getVideogames,
@@ -10,7 +10,7 @@ import {
   getGenres,
   ordenarPorGenres,
 } from "../../actions";
-/* import Videogames from "../../components/videogames/Videogames"; */
+import Videogames from "../../components/videogames/Videogames";
 import style from "./Home.module.css";
 import Nav from "../../components/nav/Nav";
 import Filtros from "../../components/filtros/Filtros";
@@ -20,17 +20,14 @@ import { GiBattleMech } from "react-icons/gi";
 import { IconContext } from "react-icons";
 import ErrorBoundary from "../../components/errorBoundary";
 
-const Videogames = React.lazy(() =>
-  import("../../components/videogames/Videogames")
-);
 
 export default function Home() {
   const videogames = useSelector((store) => store.videogames);
   const genres = useSelector((store) => store.genres);
   const dispatch = useDispatch();
   const [render, setRender] = useState("videogames"); // Estado que maneja que es lo que se renderiza en el componente^
-  const [ordenadores, setOrdenadores] = useState(false);
-  const [filtros, setFiltros] = useState(false);
+  
+  
 
   useEffect(() => {
     console.log("entro a getVideogames");
@@ -86,6 +83,7 @@ export default function Home() {
   //-----------------Ordenadores (estados, useEffect y funciones)--(componente Ordenadores)-----------------
 
   const [ordenAlfabetico, setOrdenAlfabetico] = useState(false); // Estados que manejan los if que ejecutan las actions ordenadoras
+  const [ordenadores, setOrdenadores] = useState(false);
   const [descendente, setDescendente] = useState(false);
   const [rating, setRating] = useState(false);
 
@@ -107,18 +105,6 @@ export default function Home() {
     }
   }, [dispatch, ordenAlfabetico, descendente, rating]);
 
-  const setOrdenAlfabeticoChange = useCallback(() => {
-    setOrdenAlfabetico(true);
-  }, []);
-
-  const setDescendenteChange = useCallback(() => {
-    setDescendente(true);
-  }, []);
-
-  const setRatingChange = useCallback(() => {
-    setRating(true);
-  }, []);
-
   const noOrder = useCallback(() => {
     dispatch(getVideogames());
     return setOrdenadores(false);
@@ -128,6 +114,7 @@ export default function Home() {
 
   //------------------------------FILTRO POR CREATOR------------------------------------
   const gamesCreator = useSelector((store) => store.creator);
+  const [filtros, setFiltros] = useState(false);
   const [creator, setCreator] = useState(false);
 
   const noFilter = useCallback(() => {
@@ -216,9 +203,9 @@ export default function Home() {
           )}
           {ordenadores && (
             <Ordenadores
-              setOrdenAlfabeticoChange={setOrdenAlfabeticoChange}
-              setDescendenteChange={setDescendenteChange}
-              setRatingChange={setRatingChange}
+              setOrdenAlfabetico={setOrdenAlfabetico}
+              setDescendente={setDescendente}
+              setRating={setRating}
               noOrder={noOrder}
             />
           )}
@@ -245,7 +232,7 @@ export default function Home() {
 
       <section className={style.section}>
         <ErrorBoundary>
-          <Suspense fallback={null}>
+          
             <Videogames
               render={render}
               gameSearch={gameSearch}
@@ -253,7 +240,7 @@ export default function Home() {
               filterByGenres={filterByGenres}
               currentVideogames={currentVideogames}
             />
-          </Suspense>
+          
         </ErrorBoundary>
       </section>
 

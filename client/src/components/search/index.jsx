@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import style from "./search.module.css";
 import { FaSearch } from "react-icons/fa";
 
@@ -35,6 +36,10 @@ function SearchBar({ busquedaPorNombre }) {
       </form>
     </div>
   );
+}
+
+SearchBar.propTypes = {
+  busquedaPorNombre: PropTypes.func,
 }
 
 export default React.memo(SearchBar)

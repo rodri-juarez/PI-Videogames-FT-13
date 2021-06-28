@@ -1,7 +1,7 @@
 import style from "./pagination.module.css";
-/* import BottomPagination from './bottom/bottomPagination'; */
+import PropTypes from 'prop-types';
 
-export default function Pagination({
+function Pagination({
   videogamesPerPage,
   totalVideogames,
   paginate,
@@ -44,3 +44,12 @@ export default function Pagination({
   );
 }
 
+Pagination.propTypes = {
+  videogamesPerPage: PropTypes.number,
+  totalVideogames: PropTypes.number,
+  paginate: PropTypes.func,
+  goToNextPage: PropTypes.func,
+  goToPreviousPage: PropTypes.func
+}
+
+export default Pagination

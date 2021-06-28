@@ -1,8 +1,10 @@
 import style from "./videogames.module.css";
 import { useState, useEffect } from "react";
 import Videogame from "./Videogame";
+import PropTypes from 'prop-types';
 
-export default function Videogames({
+
+function Videogames({
   render,
   gameSearch,
   gamesCreator,
@@ -33,3 +35,13 @@ export default function Videogames({
     </section>
   );
 }
+
+Videogames.propTypes = {
+  render: PropTypes.string,
+  gameSearch: PropTypes.arrayOf(PropTypes.object),
+  gamesCreator: PropTypes.arrayOf(PropTypes.object),
+  filterByGenres: PropTypes.arrayOf(PropTypes.object),
+  currentVideogames: PropTypes.arrayOf(PropTypes.object)
+};
+
+export default Videogames;

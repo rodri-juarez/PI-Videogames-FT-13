@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import Tooltip from "@material-ui/core/Tooltip";
 import Icon from "../Icon";
 import { Link } from "react-router-dom";
@@ -46,5 +47,11 @@ function Videogame({ id, name, background_image, genres }) {
     </div>
   );
 }
+
+Videogame.propTypes = {
+  name: PropTypes.any.isRequired,
+  background_image: PropTypes.string.isRequired,
+  genres: PropTypes.string,
+};
 
 export default React.memo(Videogame);

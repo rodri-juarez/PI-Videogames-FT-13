@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './ordenadores.module.css';
 
-function Ordenadores ({setOrdenAlfabeticoChange, setDescendenteChange, setRatingChange, noOrder}) {
+function Ordenadores ({setOrdenAlfabetico, setDescendente, setRating, noOrder}) {
     
 
     return (
@@ -17,7 +17,7 @@ function Ordenadores ({setOrdenAlfabeticoChange, setDescendenteChange, setRating
 
         <button className={style.btn}
           onClick={() => {
-            setOrdenAlfabeticoChange();
+            setOrdenAlfabetico(true);
           }}
         >
           Alfabetic
@@ -25,7 +25,7 @@ function Ordenadores ({setOrdenAlfabeticoChange, setDescendenteChange, setRating
 
         <button className={style.btn}
           onClick={() => {
-            setDescendenteChange();
+            setDescendente(true);
           }}
         >
           Asc / Desc
@@ -33,7 +33,7 @@ function Ordenadores ({setOrdenAlfabeticoChange, setDescendenteChange, setRating
 
         <button className={style.btn}
           onClick={() => {
-            setRatingChange();
+            setRating(true);
           }}
         >
           Rating
