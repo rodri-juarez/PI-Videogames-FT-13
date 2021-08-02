@@ -34,7 +34,7 @@ router.get("/videogames", async (req, res) => {
         console.log(next);
         return next;
       })
-      /* .then(async (next) => {
+      .then(async (next) => {
         console.log("entro a 2do then");
         const response = await axios.get(`${next}`);  
 
@@ -71,7 +71,7 @@ router.get("/videogames", async (req, res) => {
         });
         next = response.data.next;
         return next;
-      }) */
+      })
       .catch((error) => {
         return res.status(500).json(error);
       });
