@@ -4,12 +4,13 @@ export default function PaginaInicial() {
   return (
     <div className={style.div}>
       <div className={style.button}>
-        <h1 className={style.h1}>Welcome to Henry Games!</h1>
+        <h1 className={style.h1}>Welcome to Henry Videogames!</h1>
 
-        <Link className={style.link} to="/Home">
+        
+      </div>
+      <Link className={style.link} to="/Home">
           <button className={style.btn}> HOME</button>
         </Link>
-      </div>
     </div>
   );
 }

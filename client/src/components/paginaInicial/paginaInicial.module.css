@@ -6,10 +6,10 @@
 .button{
     display: block;
     justify-content: center; 
-    width: 600px;
+    width: 1000px;
     text-decoration: none;
     margin-top: 140px;
-    margin-left: 75px;
+    margin-left: 15%;
 }
 
 
@@ -17,20 +17,21 @@
     position: fixed;
     height: 750px;
     width: 1366px;
-    background-image: url('https://media.rawg.io/media/games/4dd/4ddaecc5da9431e2fc7e9be1477ff31e.jpg');
+    background-image: url('../../images/fondo\ 1.jpg');
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 100% 100%;
 }
 
 .btn{
-    margin-left: 220px;
+    margin-top: 17%;
+    margin-left: 45%;
     width: 120px;
     height: 70px;
     font-weight: bold;
     border: none;
     border-radius: 50% ;
-    background: rgb(255, 168, 86);
-    font-size: 1.1rem;    
+    background: rgb(255, 255, 255);
+    font-size: 1.4rem;    
     text-decoration: none;
 }
 
@@ -42,6 +43,6 @@
 .h1{
     display: flex;
     justify-content: center;
-    font-size: 2.5rem;
-
+    font-size: 3.5rem;
+    color: white
 }
