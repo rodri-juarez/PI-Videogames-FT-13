@@ -5,10 +5,10 @@ const { Sequelize } = require("sequelize");
 const { Videogame, Genres } = require("../db.js");
 const { v4: uuidv4 } = require("uuid");
 
-// Importar todos los routers;
+// Importar todos los routers; 
 // Ejemplo: const authRouter = require('./auth.js');
 
-const API_KEY = process.env.VIDEOGAMES_API_KEY;
+const API_KEY = process.env.API_KEY;   
 const router = Router();
 
 // Configurar los routers
