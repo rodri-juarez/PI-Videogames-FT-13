@@ -8,7 +8,7 @@ const PaginaInicial = lazy(() =>
 );
 const Home = lazy(() => import("./home/index"));
 const CreateVideogame = lazy(() => import("../components/createVideogame"));
-const About = lazy(() => import("../components/about"));
+
 const VideogameDetail = lazy(() =>
   import("../components/videogameDetail/index.jsx")
 );
@@ -29,9 +29,6 @@ function App() {
             </Route>
             <Route exact path="/CreateVideogame">
               <CreateVideogame />
-            </Route>
-            <Route exact path="/About">
-              <About />
             </Route>
             <Route
               exact

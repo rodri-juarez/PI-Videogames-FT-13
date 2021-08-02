@@ -8,17 +8,11 @@ import { Link } from 'react-router-dom';
 function Nav({busquedaPorNombre}) {
   return (
     <nav className={style.h1}>
-        
+          
         {/*  Section de Busqueda */}
 
         <div className={style.div}>
           <Search busquedaPorNombre={busquedaPorNombre} />
-        </div>
-
-        <div className={style.link}>
-          <button className={style.btn}>
-            <Link className={style.Link} to="/About">About</Link>
-          </button>
         </div>
 
         {/*  Section NavBar - Create Videogame */}
