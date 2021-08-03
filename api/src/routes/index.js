@@ -23,7 +23,7 @@ router.get("/videogames", async (req, res) => {
     respuestaBase.map((element) => {
       return respuesta.push(element);
     });
-    console.time();
+    
     let response = await axios
       .get(`https://api.rawg.io/api/games?key=${API_KEY}`)
       .then((response) => {
@@ -31,11 +31,11 @@ router.get("/videogames", async (req, res) => {
         response.data.results.map((element) => {
           respuesta.push(element);
         });
-        console.log(next);
+        
         return next;
       })
       .then(async (next) => {
-        console.log("entro a 2do then");
+        
         const response = await axios.get(`${next}`);  
 
         response.data.results.map((element) => {
@@ -46,7 +46,16 @@ router.get("/videogames", async (req, res) => {
         return next;
       })
       .then(async (next) => {
-        console.log("entro al 3er then");
+        
+        const response = await axios.get(`${next}`);
+        response.data.results.map((element) => {
+          return respuesta.push(element);
+        });
+        next = response.data.next;
+        return next;
+      })
+      /* .then(async (next) => {
+        
         const response = await axios.get(`${next}`);
         response.data.results.map((element) => {
           return respuesta.push(element);
@@ -55,34 +64,25 @@ router.get("/videogames", async (req, res) => {
         return next;
       })
       .then(async (next) => {
-        console.log("entro al 4to then");
+       
         const response = await axios.get(`${next}`);
         response.data.results.map((element) => {
           return respuesta.push(element);
         });
         next = response.data.next;
         return next;
-      })
-      .then(async (next) => {
-        console.log("entro al 5to then");
-        const response = await axios.get(`${next}`);
-        response.data.results.map((element) => {
-          return respuesta.push(element);
-        });
-        next = response.data.next;
-        return next;
-      })
+      }) */
       .catch((error) => {
         return res.status(500).json(error);
       });
-    console.timeEnd();
-    if (respuesta.length > 90) console.log("respuesta ok");
+    
+    
     return res.json(respuesta);
   }
   
 
   if (name) {
-    console.log("entro a ejecucion de query por name");
+    
     try {
       const filtrado = [];
       const respuestaBase = await Videogame.findAll({ where: { name: name } });
@@ -116,7 +116,7 @@ router.get("/videogame/:id", async (req, res) => {
     }
 
     try {
-      console.log("entro a try de busqueda por ID");
+      
       const game = await Videogame.findOne({ where: { id: ID } });
 
       if (game) return res.json(game);
@@ -131,7 +131,7 @@ router.get("/videogame/:id", async (req, res) => {
 });
 
 router.get("/genres", async (req, res) => {
-  console.log("adentro de pedido por generos back");
+  
   let response = await axios.get(
     `https://api.rawg.io/api/genres?key=${API_KEY}`
   );
@@ -180,7 +180,7 @@ router.post("/videogame", async (req, res) => {
   let respuesta = await axios.get(
     `https://api.rawg.io/api/games?search=${videogame.name}&key=${API_KEY}`
   );
-  console.log("-----respuesta api");     
+   
 
   if (respuesta) {
     let filtro = respuesta.data.results.find(
@@ -204,7 +204,7 @@ router.post("/videogame", async (req, res) => {
       });
       await juego.addGenres(nuevoGenre);
     }
-    console.log(juego);
+    
     return res.status(200).json("El juego ha sido creado exitosamente");
   }
 });
