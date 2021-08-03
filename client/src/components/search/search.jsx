@@ -10,18 +10,21 @@ import style from "./search.module.css";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: '2px 4px',
+        /* padding: '2px 4px', */
         display: 'flex',
         alignItems: 'center',
-        width: '35%',
+        width: '40%',
+        height:'40%',
         marginTop: '2.5%',
         background: 'rgb(65, 65, 65)',
+        borderRadius:'25px',
 
     },
     input: {
         marginLeft: theme.spacing(1),
         flex: 1,
         color: 'rgb(255, 255, 255)',
+       
     },
     iconButton: {
         padding: 10,
@@ -53,7 +56,7 @@ export default function Search({ busquedaPorNombre }) {
             </IconButton>
             <InputBase
                 className={classes.input}
-                placeholder="Search Videogame"
+                placeholder="Search videogame"
                 inputProps={{ 'aria-label': 'search videogame' }}
                 onChange={(e) => handleChange(e)}
             />
