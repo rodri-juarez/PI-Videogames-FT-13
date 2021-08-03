@@ -11,14 +11,17 @@ import {
   ordenarPorGenres,
 } from "../../actions";
 import Videogames from "../../components/videogames/Videogames";
+import Search from '../../components/search/search'
 import style from "./Home.module.css";
-import Nav from "../../components/nav/Nav";
 import Filtros from "../../components/filtros/Filtros";
 import Pagination from "../../components/pagination/index";
 import Ordenadores from "../../components/ordenadores/Ordenadores";
-import { GiBattleMech } from "react-icons/gi";
-import { IconContext } from "react-icons";
 import ErrorBoundary from "../../components/errorBoundary";
+
+
+
+
+
 
 
 export default function Home() {
@@ -26,8 +29,9 @@ export default function Home() {
   const genres = useSelector((store) => store.genres);
   const dispatch = useDispatch();
   const [render, setRender] = useState("videogames"); // Estado que maneja que es lo que se renderiza en el componente^
-  
-  
+
+
+
 
   useEffect(() => {
     console.log("entro a getVideogames");
@@ -147,15 +151,15 @@ export default function Home() {
     <>
       {/*  Section NavBar */}
 
-      <nav className={style.nav}>
+      {/* <nav className={style.nav}>
         <ErrorBoundary>
           <Nav busquedaPorNombre={busquedaPorNombre} />
         </ErrorBoundary>
-      </nav>
+      </nav> */}
 
       {/*  Section de Ordenamiento */}
 
-      <div className={style.divFiltros}>
+      {/*      <div className={style.divFiltros}>
         <ErrorBoundary>
           <IconContext.Provider
             value={{
@@ -189,7 +193,28 @@ export default function Home() {
             </div>
           </IconContext.Provider>
         </ErrorBoundary>
+      </div> */}
+      <div className={style.divFiltros}>
+        {/* <Paper component="form" className={classes.root}>
+        <IconButton className={classes.iconButton} aria-label="menu">
+        <Link className={style.Link} to="/Home">Home</Link>
+        </IconButton>
+        <InputBase
+          className={classes.input}
+          placeholder="Search Videogame"
+          inputProps={{ 'aria-label': 'search videogame' }}
+        />
+        <IconButton type="submit" className={classes.iconButton} aria-label="search">
+          <SearchIcon />
+        </IconButton>
+        <Divider className={classes.divider} orientation="vertical" />
+        <IconButton color="primary" className={classes.iconButton} aria-label="directions">
+        <Link className={style.Link} to="/CreateVideogame">Create Videogame</Link>
+        </IconButton>
+      </Paper> */}
+        <Search busquedaPorNombre={busquedaPorNombre} />
       </div>
+
 
       <div className={style.filtros}>
         <ErrorBoundary>
@@ -232,15 +257,15 @@ export default function Home() {
 
       <section className={style.section}>
         <ErrorBoundary>
-          
-            <Videogames
-              render={render}
-              gameSearch={gameSearch}
-              gamesCreator={gamesCreator}
-              filterByGenres={filterByGenres}
-              currentVideogames={currentVideogames}
-            />
-          
+
+          <Videogames
+            render={render}
+            gameSearch={gameSearch}
+            gamesCreator={gamesCreator}
+            filterByGenres={filterByGenres}
+            currentVideogames={currentVideogames}
+          />
+
         </ErrorBoundary>
       </section>
 

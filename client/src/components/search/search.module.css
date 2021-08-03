@@ -31,3 +31,11 @@
 .input::-webkit-input-placeholder {
     text-align: center;
   }
+
+.Link{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    margin: 5px;
+}
