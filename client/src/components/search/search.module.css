@@ -1,36 +1,13 @@
-.btn {
-    height: 30px;
-    width: 50px;
-    margin: 5px;
-    margin-top: 10px;
-    margin-left: 30px;
-    font-weight: bold;
-    border-radius: 20px;
-    background-color: rgb(243, 140, 80);
-    border: none;
-    display: inline-flex;
-    justify-content: center;
+.root {
+    display: flex;
     align-items: center;
- }
-
-.search {
-    /* border: red solid 1 px; */
-    display: inline-flex;
-    justify-content: center;
-    margin-left: 50px;
+    width: 40%;
+    height:40%;
+    margin-top: 2.5%;
+    background-color: rgb(65, 65, 65);
+    border-radius: 25px;
+    
 }
-
-.input{
-    height: 23px;
-    border-radius: 10px;
-    outline: none;
-    border: none;
-}
-
-
-.input::-webkit-input-placeholder {
-    text-align: center;
-  }
 
 .Link{
     color: rgb(42, 42, 42);
@@ -46,3 +23,13 @@
     border-radius: 25px;
     
 }
+
+ @media (max-width: 500px) {
+    .root {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: auto;
+    margin: 10%;
+    }
+} 

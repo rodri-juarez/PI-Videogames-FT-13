@@ -123,3 +123,12 @@
     font-size: 1rem;
     margin: 5px;
 }
+
+@media (max-width: 500px) {
+    .divFiltros {
+    
+    height: auto;
+    width: auto;
+    }
+
+} 
