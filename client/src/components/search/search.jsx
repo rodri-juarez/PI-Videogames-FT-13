@@ -10,7 +10,7 @@ import style from "./search.module.css";
 
 const useStyles = makeStyles((theme) => ({
     input: {
-        marginLeft: theme.spacing(1),
+        marginLeft: theme.spacing(4),
         flex: 1,
         color: 'rgb(255, 255, 255)',
         
