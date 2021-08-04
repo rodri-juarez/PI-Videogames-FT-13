@@ -249,7 +249,9 @@ export default function Home() {
       </div>
 
       {/*  Section de Videogames */}
-      {videogames.length > 0 ? (
+      { !videogames.length > 0 ? (
+      <h1 className={style.h1Pagination}><CircularIndeterminate /></h1>
+      ) : (
         <section className={style.section}>
           <ErrorBoundary>
 
@@ -262,8 +264,6 @@ export default function Home() {
             />
           </ErrorBoundary>
         </section>
-      ) : (
-        <h1 className={style.h1Pagination}><CircularIndeterminate /></h1>
       )
       }
       {/*  Section de Paginacion */}

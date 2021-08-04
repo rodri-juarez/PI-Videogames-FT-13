@@ -1,13 +1,10 @@
-
-.section{
+.section {
   margin-top: 20px;
   display: inline-flex;
   flex-wrap: wrap;
-  align-items:center;
+  align-items: center;
   justify-content: center;
-  /* border:rgb(14, 204, 14) solid 10px; */
 }
-
 
 #closeIcon {
   display: flex;
@@ -16,29 +13,24 @@
   margin-top: 8px;
 }
 
-
-.prueba{ 
-  background:transparent;
-  color:white;
+.prueba {
+  background: transparent;
+  color: white;
   justify-content: center;
-
 }
 
-
-.img{
+.img {
   top: 0;
   height: 200px;
   width: 300px;
 }
 
-.texto{
-  height: 100px;
+.texto {
+  height: 12%;
   width: 300px;
- /*  border: yellow solid 1px; */
-  /* font-family: 'Bangers', cursive; */
 }
 
-.link{
+.link {
   display: flex;
   justify-content: center;
   color: white;
@@ -46,43 +38,39 @@
   font-size: 1.2rem;
   margin: 5px;
   margin-top: 10px;
-
 }
 
-
-
-.a{
+.a {
   margin-left: 22px;
   margin-right: 22px;
   margin-top: 10px;
   margin-bottom: 10px;
-  height: 300px;
-  width: 300px;
-  /* border: blue solid 2px; */
+  height: 45%;
+  width: 330px;
+  /* border: blue solid; */
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.p{
- /*  border: red solid 5px; */
+.a:hover {
+  transition: 500ms;
+  transform: scale(1.1);
+}
+
+.p {
   margin: 20px;
 }
 
-
-.genres{
-  /* border: red solid 1px; */
+.genres {
   display: flex;
   justify-content: center;
-
 }
 
-.genre{
-  /* border: red solid 1px; */
+.genre {
   margin: 5px;
 }
 
-.margin{
+.margin {
   margin: 10px;
-
 }
