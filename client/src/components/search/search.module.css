@@ -23,6 +23,13 @@
     border-radius: 25px;
     
 }
+.divider {
+    height: 28px;
+    margin: 4px;
+
+}
+
+
 
  @media (max-width: 500px) {
     .root {
@@ -32,4 +39,15 @@
     width: auto;
     margin: 10%;
     }
+    .divider {
+        display: none;
+    }
+} 
+
+
+@media (max-width: 1000px) and (min-width: 501px) {
+    .root {
+    width: 400px;
+    }
+    
 } 
