@@ -45,7 +45,7 @@ export default function Search({ busquedaPorNombre }) {
         busquedaPorNombre(name);
     }
     return (
-        <Paper component="form" className={style.root, classes.root} onSubmit={(e) => handleSubmit(e)}>
+        <Paper component="form" className={style.root} onSubmit={(e) => handleSubmit(e)}>
             <IconButton className={classes.iconButton} aria-label="menu">
                 <Link className={style.Link} to="/Home">Home</Link>
             </IconButton>
