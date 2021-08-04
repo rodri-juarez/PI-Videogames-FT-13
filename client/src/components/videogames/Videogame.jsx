@@ -25,20 +25,20 @@ function Videogame({ id, name, background_image, genres }) {
             {genres &&
               genres.map((genre) => {
                 return (
-                  <>
-                    <div>
-                      <Tooltip
-                        disableFocusListener
-                        disableTouchListener
-                        interactive
-                        title={`${genre.name}`}
-                      >
-                        <div className={style.margin}>
-                          <Icon name={genre.name} />
-                        </div>
-                        </Tooltip>
-                    </div>
-                  </>
+
+                  <div key={genre.name}>
+                    <Tooltip
+                      disableFocusListener
+                      disableTouchListener
+                      interactive
+                      title={`${genre.name}`}
+                    >
+                      <div className={style.margin}>
+                        <Icon name={genre.name} />
+                      </div>
+                    </Tooltip>
+                  </div>
+
                 );
               })}
           </div>
@@ -51,7 +51,7 @@ function Videogame({ id, name, background_image, genres }) {
 Videogame.propTypes = {
   name: PropTypes.any.isRequired,
   background_image: PropTypes.string.isRequired,
-  genres: PropTypes.string,
+  genres: PropTypes.array,
 };
 
 export default React.memo(Videogame);

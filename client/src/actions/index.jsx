@@ -49,7 +49,6 @@ export function addVideogame({ name, description, released, rating, plataforms, 
 
 export function getGenres() {
   return async function (dispatch) {
-    console.log('adentro de pedido por genres')
     const response = await axios.get(
       `/genres`
     );

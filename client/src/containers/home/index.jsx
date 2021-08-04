@@ -17,10 +17,7 @@ import Filtros from "../../components/filtros/Filtros";
 import Pagination from "../../components/pagination/index";
 import Ordenadores from "../../components/ordenadores/Ordenadores";
 import ErrorBoundary from "../../components/errorBoundary";
-
-
-
-
+import CircularIndeterminate from '../../components/MaterialUI/CircularIndeterminate';
 
 
 
@@ -31,13 +28,11 @@ export default function Home() {
   const [render, setRender] = useState("videogames"); // Estado que maneja que es lo que se renderiza en el componente^
 
 
-
-
   useEffect(() => {
-    console.log("entro a getVideogames");
+
     if (videogames.length === 0) dispatch(getVideogames()); // Cuando se monta el componente, se pide al back los videogames
     if (genres.length === 0) {
-      console.log("buscando generos");
+
       return dispatch(getGenres());
     }
   }, [dispatch, genres, videogames]);
@@ -254,21 +249,23 @@ export default function Home() {
       </div>
 
       {/*  Section de Videogames */}
+      {videogames.length > 0 ? (
+        <section className={style.section}>
+          <ErrorBoundary>
 
-      <section className={style.section}>
-        <ErrorBoundary>
-
-          <Videogames
-            render={render}
-            gameSearch={gameSearch}
-            gamesCreator={gamesCreator}
-            filterByGenres={filterByGenres}
-            currentVideogames={currentVideogames}
-          />
-
-        </ErrorBoundary>
-      </section>
-
+            <Videogames
+              render={render}
+              gameSearch={gameSearch}
+              gamesCreator={gamesCreator}
+              filterByGenres={filterByGenres}
+              currentVideogames={currentVideogames}
+            />
+          </ErrorBoundary>
+        </section>
+      ) : (
+        <h1 className={style.h1Pagination}><CircularIndeterminate /></h1>
+      )
+      }
       {/*  Section de Paginacion */}
 
       <nav>
@@ -281,9 +278,7 @@ export default function Home() {
               goToNextPage={goToNextPage}
               goToPreviousPage={goToPreviousPage}
             />
-          ) : (
-            <h1 className={style.h1Pagination}>No Videogames to display</h1>
-          )}
+          ) : null}
         </ErrorBoundary>
       </nav>
 
