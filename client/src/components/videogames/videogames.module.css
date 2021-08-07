@@ -3,15 +3,10 @@
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content:center;
+  
 }
 
-#closeIcon {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 8px;
-  margin-top: 8px;
-}
 
 .prueba {
   background: transparent;
@@ -41,16 +36,14 @@
 }
 
 .a {
+ 
   margin-left: 22px;
   margin-right: 22px;
-  margin-top: 10px;
   margin-bottom: 20px;
-  height: 45%;
+  height: 320px;
   width: 330px;
-  /* border: blue solid; */
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .a:hover {

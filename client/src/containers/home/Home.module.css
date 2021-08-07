@@ -63,6 +63,7 @@
     align-items: baseline;
     /* border: none; */
     background-color: rgb(243, 140, 80);
+    width: 100vw;
 }
 
 .prueba1{

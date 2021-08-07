@@ -2,6 +2,7 @@ import { useState } from "react";
 import { addVideogame } from "../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import { getGenres } from "../../actions";
+import Swal from "sweetalert2";
 import style from "./createVideogame.module.css";
 import Tooltip from "../tooltip";
 import Icon from "../Icon";
@@ -57,6 +58,13 @@ export default function CreateVideogame() {
         creator,
       })
     );
+    Swal.fire({
+      text: "Videogame Create",
+      icon: "success",
+      confirmButtonText: "Success!",
+      background: "#1f1f1f",
+      confirmButtonColor: "rgb(158, 158, 158)",
+    });
   }
   let key = 0;
 
