@@ -249,8 +249,8 @@ export default function Home() {
       </div>
 
       {/*  Section de Videogames */}
-      { !videogames.length > 0 ? (
-      <h1 className={style.h1Pagination}><CircularIndeterminate /></h1>
+      {!videogames.length > 0 ? (
+        <h1 className={style.h1Pagination}><CircularIndeterminate /></h1>
       ) : (
         <section className={style.section}>
           <ErrorBoundary>
@@ -267,10 +267,10 @@ export default function Home() {
       )
       }
       {/*  Section de Paginacion */}
+      {videogames.length > 0 && render !== 'gameSearch' ? (
+        <nav>
+          <ErrorBoundary>
 
-      <nav>
-        <ErrorBoundary>
-          {videogames.length > 0 ? (
             <Pagination
               videogamesPerPage={videogamesPerPage}
               totalVideogames={videogames.length}
@@ -278,11 +278,11 @@ export default function Home() {
               goToNextPage={goToNextPage}
               goToPreviousPage={goToPreviousPage}
             />
-          ) : null}
-        </ErrorBoundary>
-      </nav>
 
-      <footer></footer>
+          </ErrorBoundary>
+        </nav>
+      ) : null}
+      
     </>
   );
 }

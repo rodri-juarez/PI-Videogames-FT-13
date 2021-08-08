@@ -7,9 +7,10 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import { Link } from 'react-router-dom';
 import style from "./search.module.css";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+    rootLG: {
         display: 'flex',
         alignItems: 'center',
         width: '40%',
@@ -19,8 +20,18 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '25px',
     },
 
+    rootSM: {
+        display: 'flex',
+        flexDirection: 'column',
+        height: 'auto',
+        width: '400px',
+        margin: '10%',
+        background: 'rgb(65, 65, 65)',
+        borderRadius: '25px',
+    },
+
     input: {
-        marginLeft: theme.spacing(4),
+        marginLeft: theme.spacing(5),
         flex: 1,
         color: 'rgb(255, 255, 255)',
 
@@ -34,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Search({ busquedaPorNombre }) {
     const classes = useStyles();
+    const media = useMediaQuery('(max-width:500px)')
     const [name, setName] = useState();
 
     function handleChange(e) {
@@ -45,7 +57,7 @@ export default function Search({ busquedaPorNombre }) {
         busquedaPorNombre(name);
     }
     return (
-        <Paper component="form" className={style.root} onSubmit={(e) => handleSubmit(e)}>
+        <Paper component="form" className={media ? classes.rootSM : classes.rootLG} onSubmit={(e) => handleSubmit(e)}>
             <IconButton className={classes.iconButton} aria-label="menu">
                 <Link className={style.Link} to="/Home">Home</Link>
             </IconButton>

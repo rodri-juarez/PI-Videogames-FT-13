@@ -1,11 +1,11 @@
 .root {
-    background-color: rgb(65, 65, 65);
-    border-radius: 25px;
     display: flex;
     align-items: center;
     width: 40%;
     height:40%;
     margin-top: 2.5%;
+    background-color: rgb(65, 65, 65);
+    border-radius: 25px;
 }
 
 .Link{
@@ -30,7 +30,7 @@
 
 
  @media (max-width: 500px) {
-    .root {
+    .rootSM {
     display: flex;
     flex-direction: column;
     height: auto;
