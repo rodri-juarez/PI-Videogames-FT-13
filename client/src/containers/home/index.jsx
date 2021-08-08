@@ -149,7 +149,7 @@ export default function Home() {
       </div>
 
       <div className={style.filtros}>
-        <ErrorBoundary>
+        {/* <ErrorBoundary> */}
           {!ordenadores && (
             <button
               className={style.btnFilter}
@@ -182,7 +182,7 @@ export default function Home() {
               noFilter={noFilter}
             />
           )}
-        </ErrorBoundary>
+        {/* </ErrorBoundary> */}
       </div>
 
       {/*  Section de Videogames */}

@@ -84,11 +84,11 @@ export default function CreateVideogame() {
   }
 
   return (<>
-    <Link className={style.link2} to="/Home"> 
+    {<Link className={style.link2} to="/Home"> 
     <IconButton className={style.btn2} aria-label="Home">
       Home
     </IconButton>
-    </Link>
+    </Link>}
     <div className={style.container}>
       <form className={style.form} onSubmit={(e) => handleSubmit(e)}>
 
@@ -108,7 +108,7 @@ export default function CreateVideogame() {
 
         <div className={style.containerButtom}>
 
-          <div class={style.containNew}>
+          <div className={style.containNew}>
             <div>
               {" "}
               {newGenre.map((e) => {

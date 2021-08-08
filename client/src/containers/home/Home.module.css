@@ -12,12 +12,14 @@
 
 
 .filtros{
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    /* border: brown solid 5px; */
+    margin-left: 25%;
     font-family: 'Bangers', cursive;
-    height: 100px;
+    height: auto;
+    width: 50%;
+    flex-wrap: wrap;
 }
 
 
