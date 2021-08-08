@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getGenres } from "../../actions";
 import Swal from "sweetalert2";
 import style from "./createVideogame.module.css";
-import Tooltip from "../tooltip";
+import Tooltip from "@material-ui/core/Tooltip";
 import Icon from "../Icon";
 import Name from './inputName'
 import Description from "./inputDescription";
@@ -13,11 +13,13 @@ import Rating from "./inputRating";
 import Plataforms from "./inputPlataforms";
 import Genres from './inputGenres';
 import AddButtom from "./addButtom";
+import IconButton from '@material-ui/core/IconButton';
+import { Link } from 'react-router-dom';
 
 export default function CreateVideogame() {
   const generos = useSelector((store) => store.genres);
   const dispatch = useDispatch();
-  
+
   const [newVideogame, setNewVideogame] = useState({
     background_image:
       "https://media.rawg.io/media/screenshots/8ba/8ba023119cc83dff0d1d535f12e6b348.jpg",
@@ -28,7 +30,7 @@ export default function CreateVideogame() {
   const [newGenre, setNewGenre] = useState([]);
   const [newPlatform, setNewPlatform] = useState([]);
 
-  
+
 
   const {
     name,
@@ -42,7 +44,7 @@ export default function CreateVideogame() {
   } = newVideogame;
 
   if (generos.length === 0) dispatch(getGenres());
-  
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -81,26 +83,31 @@ export default function CreateVideogame() {
     }
   }
 
-  return (
+  return (<>
+    <Link className={style.link2} to="/Home"> 
+    <IconButton className={style.btn2} aria-label="Home">
+      Home
+    </IconButton>
+    </Link>
     <div className={style.container}>
       <form className={style.form} onSubmit={(e) => handleSubmit(e)}>
 
         <Name setNewVideogame={setNewVideogame} newVideogame={newVideogame} />
-        
+
         <Description setNewVideogame={setNewVideogame} newVideogame={newVideogame} />
 
         <Released setNewVideogame={setNewVideogame} newVideogame={newVideogame} />
-     
+
         <Rating setNewVideogame={setNewVideogame} newVideogame={newVideogame} />
 
-        <Plataforms setNewVideogame={setNewVideogame} newVideogame={newVideogame}/>
-        
+        <Plataforms setNewVideogame={setNewVideogame} newVideogame={newVideogame} />
+
         <Genres setNewVideogame={setNewVideogame} newVideogame={newVideogame} generos={generos} />
 
         <AddButtom setNewPlatform={setNewPlatform} setNewGenre={setNewGenre} newGenre={newGenre} newPlatform={newPlatform} />
 
         <div className={style.containerButtom}>
-          
+
           <div class={style.containNew}>
             <div>
               {" "}
@@ -186,18 +193,18 @@ export default function CreateVideogame() {
         </div>
       </form>
 
-      { newVideogame.name && <div key={newVideogame.id} className={style.a}>
+      {newVideogame.name && <div key={newVideogame.id} className={style.a}>
         <div className={style.prueba}>
-          
-            <div
-              style={{
-                backgroundImage: `url(${newVideogame.background_image})`,
-                backgroundSize: "100% 100%",
-                backgroundRepeat: "no-repeat",
-              }}
-              className={style.img}
-            ></div>
-         
+
+          <div
+            style={{
+              backgroundImage: `url(${newVideogame.background_image})`,
+              backgroundSize: "100% 100%",
+              backgroundRepeat: "no-repeat",
+            }}
+            className={style.img}
+          ></div>
+
 
           <div className={style.texto}>
             <div className={style.link}> {newVideogame.name} </div>
@@ -207,7 +214,9 @@ export default function CreateVideogame() {
                   return (
                     <>
                       <div className={style.e}>
-                        <Tooltip content={`${genre.name}`} direction="bottom">
+                        <Tooltip title={`${genre.name}`} disableFocusListener
+                          disableTouchListener
+                          interactive>
                           <div className={style.margin}>
                             <Icon name={genre.name} />
                           </div>
@@ -221,5 +230,6 @@ export default function CreateVideogame() {
         </div>
       </div>}
     </div>
+  </>
   );
 }

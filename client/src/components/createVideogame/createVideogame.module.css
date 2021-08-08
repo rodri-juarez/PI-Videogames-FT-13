@@ -1,12 +1,12 @@
 
 .container {
-    /* border: red solid 1px; */
-    width: 500px;
+    
+    width: 100%;
     height: 42vw;
     display: flex;
     position: relative;
-    top: 3vw;
-    left: 28vw;
+    top: 1vw;
+    justify-content: center;
 }
 
 
@@ -39,6 +39,34 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.link2{
+  display: flex;
+  justify-content: flex-start;
+  /* font-size: 1rem; */
+
+  text-decoration: none;
+  margin-left: 2rem;
+  margin-top: 1.8rem;
+  
+}
+
+.btn2 {
+  font-size: 1rem;
+  height: 40px;
+  width: 120px;
+  font-weight: bold;
+  border-radius: 20px;
+  background-color: rgb(243, 140, 80);
+  border: none;
+  color:rgb(42, 42, 42)
+}
+
+.btn2:hover {
+  transition: 500ms;
+  background-color: rgb(243, 140, 80);
+  color:rgb(42, 42, 42)
 }
 
 .btn {
@@ -126,12 +154,14 @@
   .link{
     display: flex;
     justify-content: center;
-    color: white;
+    color: black;
     text-decoration: none;
-    font-size: 1.2rem;
-    margin: 5px;
+    font-size: 1.1rem;
+    margin-left: 5px;
+
   
   }
+ 
   
 
   .genres{

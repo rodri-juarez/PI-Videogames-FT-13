@@ -144,72 +144,9 @@ export default function Home() {
   //-----------------------------------------------------------RETURN----------------------------------------------------------------------
   return (
     <>
-      {/*  Section NavBar */}
-
-      {/* <nav className={style.nav}>
-        <ErrorBoundary>
-          <Nav busquedaPorNombre={busquedaPorNombre} />
-        </ErrorBoundary>
-      </nav> */}
-
-      {/*  Section de Ordenamiento */}
-
-      {/*      <div className={style.divFiltros}>
-        <ErrorBoundary>
-          <IconContext.Provider
-            value={{
-              style: {
-                fontSize: "75px",
-                color: "rgb(0, 0, 0)",
-                marginTop: "15px",
-              },
-            }}
-          >
-            <div
-              style={{
-                marginRight: "30px",
-              }}
-            >
-              <GiBattleMech />
-            </div>
-          </IconContext.Provider>
-
-          <h1 className={style.titulo}>Henry Videogames</h1>
-
-          <IconContext.Provider
-            value={{ style: { fontSize: "75px", color: "rgb(0, 0, 0)" } }}
-          >
-            <div
-              style={{
-                marginLeft: "20px",
-              }}
-            >
-              <GiBattleMech />
-            </div>
-          </IconContext.Provider>
-        </ErrorBoundary>
-      </div> */}
       <div className={style.divFiltros}>
-        {/* <Paper component="form" className={classes.root}>
-        <IconButton className={classes.iconButton} aria-label="menu">
-        <Link className={style.Link} to="/Home">Home</Link>
-        </IconButton>
-        <InputBase
-          className={classes.input}
-          placeholder="Search Videogame"
-          inputProps={{ 'aria-label': 'search videogame' }}
-        />
-        <IconButton type="submit" className={classes.iconButton} aria-label="search">
-          <SearchIcon />
-        </IconButton>
-        <Divider className={classes.divider} orientation="vertical" />
-        <IconButton color="primary" className={classes.iconButton} aria-label="directions">
-        <Link className={style.Link} to="/CreateVideogame">Create Videogame</Link>
-        </IconButton>
-      </Paper> */}
         <Search busquedaPorNombre={busquedaPorNombre} />
       </div>
-
 
       <div className={style.filtros}>
         <ErrorBoundary>
