@@ -25,7 +25,7 @@ router.get("/videogames", async (req, res) => {
     });
     
     let response = await axios
-      .get(`https://api.rawg.io/api/games?key=${API_KEY}`)
+      .get(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=40`)
       .then((response) => {
         let next = response.data.next;
         response.data.results.map((element) => {
@@ -42,36 +42,9 @@ router.get("/videogames", async (req, res) => {
           return respuesta.push(element);
         });
         next = response.data.next;
-        console.log(next);
-        return next;
+        return ;
       })
-      .then(async (next) => {
-        
-        const response = await axios.get(`${next}`);
-        response.data.results.map((element) => {
-          return respuesta.push(element);
-        });
-        next = response.data.next;
-        return next;
-      })
-      .then(async (next) => {
-        
-        const response = await axios.get(`${next}`);
-        response.data.results.map((element) => {
-          return respuesta.push(element);
-        });
-        next = response.data.next;
-        return next;
-      })
-      .then(async (next) => {
-       
-        const response = await axios.get(`${next}`);
-        response.data.results.map((element) => {
-          return respuesta.push(element);
-        });
-        next = response.data.next;
-        return next;
-      })
+      
       .catch((error) => {
         return res.status(500).json(error);
       });
