@@ -10,8 +10,8 @@
 
 Videogames App es una SPA (Single Page Application) en la que se puede ver distintos videojuegos con su información utilizando la API [RAWG](https://rawg.io/).
 
-Utilicé React para el Front End y Redux como state management. Todos los componentes fueron desarrollados con CSS.
-La SPA consume los datos de [RAWG](https://rawg.io/) a través de un Back End desarrollado en Node.JS
+Utilicé React para el Frontend y Redux como state management. Todos los componentes fueron desarrollados con CSS.
+La SPA consume los datos de [RAWG](https://rawg.io/) a través de un Backend desarrollado en Node.JS
 utilizando Express, agregando nuevas funcionalidades a la API original.
 
 Algunas funcionalidades del proyecto: 
